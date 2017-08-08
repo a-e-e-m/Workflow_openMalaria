@@ -164,7 +164,7 @@ for u=1:1:U_dim;
     end
     
     %gives the name of the uth experiment 
-    Experiment_name=E_stored{indexa, indexb, indexc, 1};
+    Experiment_name=strcat(E_stored{indexa, indexb, indexc, 1}, E_stored{indexa, indexb, indexc, 2});
     
     plotfs = 5;
     Title=title(strcat(Experiment_name,' ','(median over',num2str(Eind_dim),'scenarios)'), 'Interpreter', 'none');

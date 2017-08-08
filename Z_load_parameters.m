@@ -12,14 +12,18 @@ fclose(fileID);
 
 %for A_load_scenarios
 
-%Find 'pathscen', the path to the scenarios.txt file.
+%Find 'pathscen', the path to the scenarios.csv file.
 pathscen_found=find(strcmp(Para{1,1},'pathscen'),1);
 pathscen=Para{1, 2}{pathscen_found};
 
-%Find 'scen_columns', the number of columns in the fiel scenarios.csv.
-scen_columns_found=find(strcmp(Para{1,1},'scen_columns'),1);
-scen_columns=str2double(Para{1, 2}{scen_columns_found});
-
+%finds scen_columns by itself
+filepath=strcat(pathscen, '/scenarios.csv');
+fileID = fopen(filepath);
+C_trash = textscan(fileID, '%s',1);
+C_trash = char(C_trash{1,1});
+fclose(fileID);
+C_trash_commas_found=strfind(C_trash, ',');
+scen_columns=numel(C_trash_commas_found)+1;
 
 %Find name, values and labels for the scenario parameters.
 P_found=find(strcmp(Para{1,1},'P'));

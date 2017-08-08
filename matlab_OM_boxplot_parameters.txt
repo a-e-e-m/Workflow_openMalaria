@@ -3,9 +3,6 @@
 %Please insert 'path' to the scenarios.txt file
 pathscen=..
 
-%Please insert number of columns in the fiel scenarios.csv 
-scen_columns=7
-
 
 %Please insert the scenario parameters with its values and labels 
 %in the form P=parameter=parameterlabel=value=valuelabel
@@ -18,8 +15,8 @@ scen_columns=7
 %More scenario parameters can be given, but have to be fixed to one
 %single value.
 %The order of the values given here will be preserved.
-P=scaled_annual_EIR=total EIR p.a.=20=20
 P=scaled_annual_EIR=total EIR p.a.=200=200
+P=scaled_annual_EIR=total EIR p.a.=250=250
 
 P=shares_species=dom. species=arab=arab
 P=shares_species=dom. species=gamb=gamb
@@ -34,13 +31,16 @@ P=shares_species=dom. species=fune=fune
 %The order of the values given here will be preserved.
 I=traps=T=reference=0
 I=traps=T=0_2=0.2
+I=traps=T=0_4=0.4
 
 I=repellent=R=reference=0
-I=repellent=R=0_6=0.6
-I=repellent=R=0_75=0.75
-I=repellent=R=0_9=0.9
+I=repellent=R=0_3=0.3
+I=repellent=R=0_5=0.5
+I=repellent=R=0_7=0.7
 
+I=trap_avail=trap_avail=reference=arab0.3, gamb 0.7, fune 1
 
+I=repellent_deterrency=deterrency=0_7=0.7
 
 %for B_load_output
 
@@ -48,7 +48,7 @@ I=repellent=R=0_9=0.9
 path_output=../outputs
 
 %Please insert 'name' of the experiment
-name=Rusingaseven
+name=Rusingaten
 
 %for C_extract_Aid_agesum
 
@@ -59,7 +59,7 @@ name=Rusingaseven
 age=0
 
 %Please insert at what survey time step you want to start the analysis 
-start=1200
+start=1344
 
 %Please insert at what survey time step you want to end the analysis 
 %Insert 0 if you want to analysis all the timesteps after start until the end
@@ -68,7 +68,7 @@ finito=0
 %Please insert the id of the output measure you want to look at
 %in the form id=number=name
 %the name will be the label of the y-axis together with the specs below
-id=14=uncomp cases
+id=14=nUncomp
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
@@ -81,4 +81,4 @@ population=10000
 year=1
 
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=./R7_boxplot_nUncomp_pp_pa_1.pdf
+pdfname=./R10_boxplot_nUncomp_pp_pa_1.pdf

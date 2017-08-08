@@ -196,7 +196,10 @@ for u=1:1:U_dim;
     file_name=strrep(Experiment_name,'.','_');
     file_name=strrep(file_name,':','_');
     file_name=strrep(file_name,' ','_'); 
-    print(gcf, strcat('-d', plotmode), strcat(file_name, '.', plotmode));
+    file_name=strcat(file_name, '.', plotmode);
+    file_name=file_name{1,1};
+    printmode=strcat('-d', plotmode);
+    print(gcf, printmode, file_name);
     end
     
 

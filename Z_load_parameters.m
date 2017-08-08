@@ -20,31 +20,26 @@ pathscen=Para{1, 2}{pathscen_found};
 scen_columns_found=find(strcmp(Para{1,1},'scen_columns'),1);
 scen_columns=str2double(Para{1, 2}{scen_columns_found});
 
-%Find name, values and labels for the first scenario parameter.
-%P1str contains the values in the first column and the corresponding
-%labels in the second
-P1_found=find(strcmp(Para{1,1},'P1'));
-P1=Para{1, 2}{P1_found(1)}; %first parameter
-P1_label=Para{1, 3}{P1_found(1)}; %label of first parameter
-P1_dim=numel(P1_found); %number of different values for P1
-P1str=cell(P1_dim,2);
-for i=1:P1_dim;
-    P1str{i,1}=Para{1,4}{P1_found(i)}; %value
-    P1str{i,2}=Para{1,5}{P1_found(i)}; %value label
-end 
 
-%Finds name, values and labels for the second scenario parameter
-%P2str contains the values in the first column and the corresponding
-%labels in the second
-P2_found=find(strcmp(Para{1,1},'P2'));
-P2=Para{1, 2}{P2_found(1)}; %second parameter
-P2_label=Para{1, 3}{P2_found(1)}; %label of second parameter
-P2_dim=numel(P2_found); %number of different values for P2
-P2str=cell(P2_dim,2);
-for i=1:P2_dim;
-    P2str{i,1}=Para{1,4}{P2_found(i)}; %value
-    P2str{i,2}=Para{1,5}{P2_found(i)}; %value label
+%Find name, values and labels for the scenario parameters.
+P_found=find(strcmp(Para{1,1},'P'));
+P_unique=unique(Para{1,2}(P_found));
+P_unique_dim=numel(P_unique);
+P=cell(P_unique_dim,5); %prepare cell to store all info for scenario parameters
+%"P{:,5}" is prepared for storing a matrix with the index vectors as rows
+
+for i=1:1:P_unique_dim
+   P{i,1}=P_unique{i}; %ith scenario parameter
+   P_unique_i_found=find(strcmp(Para{1,2}, P_unique{i})); %where info for ith scenario parameter are
+   P{i,2}=Para{1,3}{P_unique_i_found(1)};
+   P{i,3}=Para{1,4}(P_unique_i_found);
+   P{i,4}=Para{1,5}(P_unique_i_found);
 end
+
+
+
+
+
 
 
 

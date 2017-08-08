@@ -21,25 +21,26 @@ fclose(fileID);
 %number of output files
 s=numel(C{2,1});
 
+
+%loop over the number of scenario parameters 
+for i=1:1:P_unique_dim;
+    P_unique_i_inC_found=find(strcmp([C{1,:}], P{i,1}));
+    
+    P_unique_i_dim=numel(P{i,3});%number of different values for P_unique_i
+    P{i,5}=zeros(P_unique_i_dim, s); %matrix to store index vectors of P_unique_i as rows
+    
+    for j=1:1:P_unique_i_dim;
+    P{i,5}(j,:)=strcmp(C{2,P_unique_i_inC_found},P{i,3}(j));
+    end
+    
+
+
+end
+
 %identifying the column corresponding to P1, P2, I1, I2 respectively
-p1 = find(strcmp([C{1,:}], P1));
-p2 = find(strcmp([C{1,:}], P2));
 i1 = find(strcmp([C{1,:}], I1{1}));
 i2 = find(strcmp([C{1,:}], I2{1}));
 
-%gives a logic vector indicating the different parameter values of 
-%parameter P1
-D1=zeros(P1_dim,s);
-for j=1:P1_dim;
-D1(j,:)=strcmp(C{2,p1},P1str{j,1});
-end
-
-%gives a logic vector indicating the different parameter values of
-%parameter P2
-D2=zeros(P2_dim,s);
-for j=1:P2_dim;
-D2(j,:)=strcmp(C{2,p2},P2str{j,1});
-end
 
 %finds how many different values for intervention parameter 1 are there in
 %the scenario file

@@ -5,6 +5,10 @@
 %The first for-loop over n,p is only for scaling of the y-axis in the
 %second loop which gives the final plot
 
+%translating to (historical) objects
+P1_dim=numel(P{1,3});
+P2_dim=numel(P{2,3});
+
 %preparing the scaling of the Y-axes
 Yax=zeros(P1_dim,P2_dim,2);
 Yaxmax=zeros(P1_dim);
@@ -22,8 +26,18 @@ for run=1:1:2;
     close
     for n=1:P1_dim; %note that for fix n, P1 is fix
         for p=1:P2_dim; %note that for fix p, P2 is fix
-
-    D=D1(n,:).*D2(p,:); %gives vector with 0 and 1 of length s indicating the pages of A corresponding to the choosen scenario
+    
+    D=ones(1,s); %preparing index vector
+    
+    %for loop going over the scenario parameters OTHERS than P1, P2 if
+    %there are some
+    if numel(P(:,1))>2;
+        for i=3:1:numel(P(:,1));
+            D=D.*P{i,5}; %herefore scenario parameters OTHERS than P1, P2 are really not allowed to have more than one value
+        end
+    end
+    
+    D=P{1,5}(n,:).*P{2,5}(p,:); %gives vector with 0 and 1 of length s indicating the pages of A corresponding to the choosen scenario
     D_ind=find(D); %gives index numbers of those scenarios
     D_length=numel(D_ind);
 
@@ -47,8 +61,8 @@ for run=1:1:2;
                 Eind=find(E);       
                 
                 %store those
-                E_stored{n,p,colnr,1}=strcat(P1, ':', P1str{n,2}, '__', P2, ':', P2str{p,2}, '__', strcurrent); %long label of experiment
-                E_stored{n,p,colnr,2}=strcurrent; %short label of experiment
+                E_stored{n,p,colnr,1}=strcat(P{1,2}, ':', P{1,4}(n), '__', P{2,2}, ':', P{2,4}(p)); %label of situation
+                E_stored{n,p,colnr,2}=strcurrent; %label of experiment
                 E_stored{n,p,colnr,3}=Eind; %index vector of experiment
             end
             
@@ -154,7 +168,7 @@ for run=1:1:2;
     end
     hy = ylabel(ylabbel);
 
-    tit=strcat(P1, ':', P1str{n,2}, '__', P2, ':', P2str{p,2});
+    tit=E_stored{n,p,colnr,1};
     Title=title(tit, 'Interpreter', 'none');
 
     set(Title, 'FontSize', titlefs);

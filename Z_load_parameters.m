@@ -23,10 +23,12 @@ scen_columns=str2double(Para{1, 2}{scen_columns_found});
 
 %Find name, values and labels for the scenario parameters.
 P_found=find(strcmp(Para{1,1},'P'));
-P_unique=unique(Para{1,2}(P_found));
+P_unique=unique(Para{1,2}(P_found), 'stable');
 P_unique_dim=numel(P_unique);
-P=cell(P_unique_dim,5); %prepare cell to store all info for scenario parameters
+P=cell(P_unique_dim,6); %prepare cell to store all info for scenario parameters
 %"P{:,5}" is prepared for storing a matrix with the index vectors as rows
+%"P{:,6}" is prepared for storing the number of different values of the
+%parameters occuring in the scenarios 
 
 for i=1:1:P_unique_dim
    P{i,1}=P_unique{i}; %ith scenario parameter
@@ -38,36 +40,21 @@ end
 
 
 
+%Find name, values and labels for the intervention parameters.
+I_found=find(strcmp(Para{1,1},'I'));
+I_unique=unique(Para{1,2}(I_found), 'stable');
+I_unique_dim=numel(I_unique);
+I=cell(I_unique_dim,6); %prepare cell to store all info for scenario parameters
+%"I{:,5}" is prepared for storing a matrix with the index vectors as rows
+%"I{:,6}" is prepared for storing the number of different values of the
+%parameters occuring in the scenarios 
 
-
-
-
-
-%Finds name, values and labels for the first intervention parameter
-%I1 contains the name in the first column and the label in the second
-%I1str contains the values in the first column and the corresponding
-%labels in the second
-I1_found=find(strcmp(Para{1,1},'I1'));
-I1={Para{1, 2}{I1_found(1)}  Para{1, 3}{I1_found(1)}}; %first intervention and its label
-I1_dim=numel(I1_found); %number of different values for I1
-I1str=cell(I1_dim,2);
-for i=1:I1_dim;
-    I1str{i,1}=Para{1,4}{I1_found(i)}; %value   
-    I1str{i,2}=Para{1,5}{I1_found(i)}; %value label
-end
-
-
-%Finds name, values and labels for the second intervention parameter
-%I2 contains the name in the first column and the label in the second
-%I2str contains the values in the first column and the corresponding
-%labels in the second
-I2_found=find(strcmp(Para{1,1},'I2'));
-I2={Para{1, 2}{I2_found(1)}  Para{1, 3}{I2_found(1)}}; %second intervention and its label
-I2_dim=numel(I2_found); %number of different values for I2
-I2str=cell(I2_dim,2);
-for i=1:I2_dim;
-    I2str{i,1}=Para{1,4}{I2_found(i)}; %value
-    I2str{i,2}=Para{1,5}{I2_found(i)}; %value label
+for i=1:1:I_unique_dim
+   I{i,1}=I_unique{i}; %ith scenario parameter
+   I_unique_i_found=find(strcmp(Para{1,2}, I_unique{i})); %where info for ith scenario parameter are
+   I{i,2}=Para{1,3}{I_unique_i_found(1)};
+   I{i,3}=Para{1,4}(I_unique_i_found);
+   I{i,4}=Para{1,5}(I_unique_i_found);
 end
 
 

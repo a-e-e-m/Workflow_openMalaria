@@ -8,6 +8,8 @@
 %translating to (historical) objects
 P1_dim=numel(P{1,3});
 P2_dim=numel(P{2,3});
+I1_dim=numel(I{1,3});
+I2_dim=numel(I{2,3});
 
 %preparing the scaling of the Y-axes
 Yax=zeros(P1_dim,P2_dim,2);
@@ -24,8 +26,10 @@ titlefs = 10;
 for run=1:1:2;
     clf
     close
-    for n=1:P1_dim; %note that for fix n, P1 is fix
-        for p=1:P2_dim; %note that for fix p, P2 is fix
+    for n=1:P1_dim; %loop over the number of values for P1
+        %note that for fix n, P1 is fix
+        for p=1:P2_dim; %loop over the number of values for P1
+        %note that for fix p, P2 is fix
     
     D=ones(1,s); %preparing index vector
     
@@ -37,37 +41,38 @@ for run=1:1:2;
         end
     end
     
-    D=P{1,5}(n,:).*P{2,5}(p,:); %gives vector with 0 and 1 of length s indicating the pages of A corresponding to the choosen scenario
-    D_ind=find(D); %gives index numbers of those scenarios
-    D_length=numel(D_ind);
+    D=P{1,5}(n,:).*P{2,5}(p,:); %gives vector of length s having an entry "1" at all places with an index
+    %corresponding to an index (in C) of a scenario corresponding to the choosen situation
+    D_ind=find(D); %gives a vector with the indices (in C) of those scenarios
+    D_dim=numel(D_ind);  %gives the number of those scenarios
 
-    %matrix that will take the data for the boxplot
-    X=zeros(D_length/(E1str_dim*E2str_dim),(I1_dim*I2_dim));
-    %vector for the names of the boxes
-    Label=cell.empty(I1_dim*I2_dim,0);
+    
+    nseeds=D_dim/(I{1,6}*I{2,6}) %gives the number of seeds per experiment
+    X=zeros(nseeds,(I1_dim*I2_dim)); %matrix that will take the data for the boxplot
+    Label=cell.empty(I1_dim*I2_dim,0); %vector for the names of the boxes
 
-    for k=1:I1_dim;
-        for l=1:I2_dim;
+    for k=1:I1_dim; %loop over number of values for I1
+        for l=1:I2_dim; %loop over number of values for I2
             colnr=(k-1)*I2_dim+l; %gives the column corresponding to k,l
             
             if run==1;
                 %label for experiment
-                str1=strcat(I1{2},I1str{k,2});
-                str2=strcat(I2{2},I2str{l,2});
+                str1=strcat(I{1,2},I{1,4}{k});
+                str2=strcat(I{2,2},I{2,4}{l});
                 strcurrent=[str1, ' ', str2];
                 
                 %index vector for experiment
-                E=D.*E1(k,:).*E2(l,:);
+                E=D.*I{1,5}(k,:).*I{2,5}(l,:);
                 Eind=find(E);       
                 
                 %store those
-                E_stored{n,p,colnr,1}=strcat(P{1,2}, ':', P{1,4}(n), '__', P{2,2}, ':', P{2,4}(p)); %label of situation
-                E_stored{n,p,colnr,2}=strcurrent; %label of experiment
+                E_stored{n,p,colnr,1}=strcat(P{1,2}, ': ', P{1,4}(n), '__', P{2,2}, ': ', P{2,4}(p)); %label of situation
+                E_stored{n,p,colnr,2}=strcurrent; %label of experiment "without situation"
                 E_stored{n,p,colnr,3}=Eind; %index vector of experiment
             end
             
             Eind=E_stored{n,p,colnr,3}; %retrieve index vector
-            strcurrent=E_stored{n,p,colnr,2}; %retrieve short label
+            strcurrent=E_stored{n,p,colnr,2}; %retrieve label of experiment "without situation"
             
             
             %loads the data
@@ -155,7 +160,7 @@ for run=1:1:2;
     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
     %note that P2_dim is the length of the rows of the subplot
     subplot(P1_dim,P2_dim,plotnr);
-    boxplot(X, 'labels', Label);
+    boxplot(X, 'labels', Label');
 
     %subplot parameters
     hx  = xlabel('Intervention');

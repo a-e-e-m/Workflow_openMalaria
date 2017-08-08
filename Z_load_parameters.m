@@ -26,9 +26,9 @@ C_trash_commas_found=strfind(C_trash, ',');
 scen_columns=numel(C_trash_commas_found)+1;
 
 %Find name, values and labels for the scenario parameters.
-P_found=find(strcmp(Para{1,1},'P'));
-P_unique=unique(Para{1,2}(P_found), 'stable');
-P_unique_dim=numel(P_unique);
+P_found=find(strcmp(Para{1,1},'P')); %finds lines starting with "P"
+P_unique=unique(Para{1,2}(P_found), 'stable'); %list all different scenario parameters
+P_unique_dim=numel(P_unique); %number of different scenario parameters
 P=cell(P_unique_dim,6); %prepare cell to store all info for scenario parameters
 %"P{:,5}" is prepared for storing a matrix with the index vectors as rows
 %"P{:,6}" is prepared for storing the number of different values of the
@@ -36,29 +36,61 @@ P=cell(P_unique_dim,6); %prepare cell to store all info for scenario parameters
 
 for i=1:1:P_unique_dim
    P{i,1}=P_unique{i}; %ith scenario parameter
-   P_unique_i_found=find(strcmp(Para{1,2}, P_unique{i})); %where info for ith scenario parameter are
-   P{i,2}=Para{1,3}{P_unique_i_found(1)};
-   P{i,3}=Para{1,4}(P_unique_i_found);
-   P{i,4}=Para{1,5}(P_unique_i_found);
+   
+   %where info for ith scenario parameter are - within the lines beginning with P
+   Para_1_2_P=Para{1,2}(P_found);
+   P_i_found=find(strcmp(Para_1_2_P, P_unique{i})); 
+   clear Para_1_2_P;
+   
+   %label of the ith scenario parameter
+   Para_1_3_P=Para{1,3}(P_found);
+   P{i,2}=Para_1_3_P{P_i_found(1)};
+   clear Para_1_3_P;
+   
+   %values of the ith scenario parameter
+   Para_1_4_P=Para{1,4}(P_found);
+   P{i,3}=Para_1_4_P(P_i_found);
+   clear Para_1_4_P;
+   
+   %labels of the values of the ith scenario parameter
+   Para_1_5_P=Para{1,5}(P_found);
+   P{i,4}=Para_1_5_P(P_i_found);
+   clear Para_1_5_P;
 end
 
 
 
 %Find name, values and labels for the intervention parameters.
-I_found=find(strcmp(Para{1,1},'I'));
-I_unique=unique(Para{1,2}(I_found), 'stable');
-I_unique_dim=numel(I_unique);
+I_found=find(strcmp(Para{1,1},'I')); %finds lines starting with "I"
+I_unique=unique(Para{1,2}(I_found), 'stable'); %lists all different intervention parameters
+I_unique_dim=numel(I_unique); %number of different intervention parameters
 I=cell(I_unique_dim,6); %prepare cell to store all info for scenario parameters
 %"I{:,5}" is prepared for storing a matrix with the index vectors as rows
 %"I{:,6}" is prepared for storing the number of different values of the
 %parameters occuring in the scenarios 
 
 for i=1:1:I_unique_dim
-   I{i,1}=I_unique{i}; %ith scenario parameter
-   I_unique_i_found=find(strcmp(Para{1,2}, I_unique{i})); %where info for ith scenario parameter are
-   I{i,2}=Para{1,3}{I_unique_i_found(1)};
-   I{i,3}=Para{1,4}(I_unique_i_found);
-   I{i,4}=Para{1,5}(I_unique_i_found);
+   I{i,1}=I_unique{i}; %ith intervention parameter
+   
+   %where info for ith scenario parameter are - within the lines beginning with I
+   Para_1_2_I=Para{1,2}(I_found);
+   I_i_found=find(strcmp(Para_1_2_I, I{i,1})); 
+   clear Para_1_2_I
+   
+   %label of ith intervention parameter
+   Para_1_3_I=Para{1,3}(I_found);
+   I{i,2}=Para_1_3_I{I_i_found(1)};
+   clear Para_1_3_I
+   
+   %values of ith intervention parameter
+   Para_1_4_I=Para{1,4}(I_found);
+   I{i,3}=Para_1_4_I(I_i_found);
+   clear Para_1_4_I
+   
+   %labels of values of ith intervention parameter
+   Para_1_5_I=Para{1,5}(I_found);
+   I{i,4}=Para_1_5_I(I_i_found);
+   clear Para_1_5_I
 end
 
 

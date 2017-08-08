@@ -31,7 +31,7 @@ P=shares_species=dom. species=fune=fune
 %The order of the values given here will be preserved.
 I=traps=T=reference=0
 I=traps=T=0_2=0.2
-I=traps=T=0_4=0.4
+%I=traps=T=0_4=0.4
 
 I=repellent=R=reference=0
 I=repellent=R=0_3=0.3
@@ -81,4 +81,4 @@ population=10000
 year=1
 
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=./R10_boxplot_nUncomp_pp_pa_1.pdf
+pdfname=./R10_boxplot_nUncomp_pp_pa_2.pdf

@@ -41,13 +41,22 @@ for run=1:1:2;
         end
     end
     
+    %for loop going over the intervention parameters OTHERS than I1, I2 if
+    %there are some
+    if numel(I(:,1))>2;
+        for i=3:1:numel(I(:,1));
+            D=D.*I{i,5}; %herefore intervention parameters OTHERS than I1, I2 are really not allowed to have more than one value
+        end
+    end
+    
+    
     D=P{1,5}(n,:).*P{2,5}(p,:); %gives vector of length s having an entry "1" at all places with an index
     %corresponding to an index (in C) of a scenario corresponding to the choosen situation
     D_ind=find(D); %gives a vector with the indices (in C) of those scenarios
     D_dim=numel(D_ind);  %gives the number of those scenarios
 
     
-    nseeds=D_dim/(I{1,6}*I{2,6}) %gives the number of seeds per experiment
+    nseeds=D_dim/(I{1,6}*I{2,6}); %gives the number of seeds per experiment
     X=zeros(nseeds,(I1_dim*I2_dim)); %matrix that will take the data for the boxplot
     Label=cell.empty(I1_dim*I2_dim,0); %vector for the names of the boxes
 

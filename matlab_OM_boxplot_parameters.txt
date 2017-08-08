@@ -29,6 +29,8 @@ P=shares_species=dom. species=fune=fune
 %in the form I=parameter=parameterlabel=value=valuelabel
 %please note that the value must be exactly the same as the name of the 
 %corresponding file in the description folder.
+%Only the first two parameters can have several values, from the third on 
+%they cannot have more than one value. 
 %The order of the values given here will be preserved.
 I=traps=T=reference=0
 I=traps=T=0_2=0.2

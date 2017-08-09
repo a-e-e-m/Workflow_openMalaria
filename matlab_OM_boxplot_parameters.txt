@@ -42,6 +42,22 @@ I=trap_avail=trap_avail=reference=arab0.3, gamb 0.7, fune 1
 
 I=repellent_deterrency=deterrency=0_7=0.7
 
+%Please insert "compare=1" if you want to look - within every situation - 
+%at differences of the measures with respect to those of one specific experiment.
+%insert "compare=0" else.
+compare=1
+
+%If compare=1, insert here the specific experiment you want to compare to 
+%in the form "base=parameter=parameterlabel=value=valuelabel"
+%use one line per parameter (you need to do this for every intervention 
+%parameter that occours in the output).
+base=traps=T=reference=0
+base=repellent=R=reference=0
+base=trap_avail=trap_avail=reference=arab0.3, gamb 0.7, fune 1
+base=repellent_deterrency=deterrency=0_7=0.7
+
+
+
 %for B_load_output
 
 %Please insert 'path' to the output files
@@ -81,4 +97,4 @@ population=10000
 year=1
 
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=./R10_boxplot_nUncomp_pp_pa_2.pdf
+pdfname=./R10_boxplot_nUncomp_pp_pa_comparetobase.pdf

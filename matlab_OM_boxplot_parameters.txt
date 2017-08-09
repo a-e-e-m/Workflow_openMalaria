@@ -90,13 +90,13 @@ id=14=nUncomp
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
-person=0
+person=1
 population=10000
 
 %Please indicate whether you want to measure per year i.e to average over 
 %the time between start and finito
 %type year=0 for no and year=1 for yes
-year=0
+year=1
 
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=./R10_boxplot_nUncomp_comp_prop_base.pdf
+pdfname=./R10_boxplot_nUncomp_pp_pa_comp_prop_base.pdf

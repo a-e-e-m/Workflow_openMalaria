@@ -110,11 +110,59 @@ for run=1:1:2;
                %extracts the lines of A corresponding to measure id
                B_measure=B(:,measure_found,:);
                
+                    %searches for the age group "age" if specified and else sums up over 
+                    %all age groups available (may be still only one) 
+                    if age~=0;
+                        Age_1=B_measure(1,:,2)==age;
+                        Age_1_found=find(Age_1);
+                        B_measure_agesum=B_measure(:,Age_1_found,[1 4]);
+                    else
+                        %finds agegroups
+                        Agegroups=unique(B(1,measure_found,2));
+                        Agegroups_dim=numel(Agegroups);
+
+                        %summing up over agegroups if there are multiple, else only rename
+                        %A_measure_agesum
+
+                        %initialising A_id_agesum with agegroup 1
+                        %A_measure_agesum is a threedimensional array 
+                        %where each page is a matrix with the first column giving the timestep 
+                        %and the second one the value of the measure
+                        Age_1=B_measure(1,:,2)==Agegroups(1);
+                        Age_1_found=find(Age_1);
+                        B_measure_agesum=B_measure(:,Age_1_found,[1 4]);
+
+                        if Agegroups_dim > 1;
+                            for i=2:1:Agegroups_dim;
+                                %indices of lines of agegroup i
+                                Age_i=B_measure(1,:,2)==Agegroups(i);
+                                Age_i_found=find(Age_i);
+
+                                %recursively summing up over age groups
+                                B_measure_agesum(:,:,2)=B_measure_agesum(:,:,2) + B_measure(:,Age_i_found,4);
+                            end 
+                        end
+                    end
+
+                    %summing up values over survey timesteps
+                    B_measure_agesum_sum=sum(squeeze(B_measure_agesum(:,:,2)),2);
+
+                    %divides by the population size if demanded
+                    if person==1
+                        B_measure_agesum_sum=B_measure_agesum_sum/population;
+                    end
+
+                    %divides by the number of years if demanded
+                    if year==1
+                        years=(finito-start)/12;
+                        B_measure_agesum_sum=B_measure_agesum_sum/years;
+                    end
+               
             end
             
             
             base_contr=0;   %prepared counter to check if for this situation (i.e. this n,p-iteration) base experiment has already passed (base_contr=1) or not (base_contr=0)
-                                    %will stay 0 if compare==0.
+                            %will stay 0 if compare==0.
                                     
                                     
             for k=1:I1_dim; %loop over number of values for I1
@@ -198,18 +246,6 @@ for run=1:1:2;
                     %extracts the lines of A corresponding to measure id
                     A_measure=A(:,measure_found,:);
                     
-                    %if matlab shall compare to a base experiment, the values
-                    %of A_measure are here changed to differences to B_measure
-                    if compare==1
-                        A_measure(:,:,4)=B_measure(:,:,4)-A_measure(:,:,4);
-                    end
-                    
-                    %if matlab shall show measures as proportions to a base experiment, 
-                    %the values of A_measure are here changed to proportions 
-                    %with respect to B_measure
-                    if proportion==1
-                        A_measure(:,:,4)=A_measure(:,:,4)./B_measure(:,:,4);
-                    end
 
                     %searches for the age group "age" if specified and else sums up over 
                     %all age groups available (may be still only one) 
@@ -259,6 +295,20 @@ for run=1:1:2;
                         A_measure_agesum_sum=A_measure_agesum_sum/years;
                     end
 
+                    %if matlab shall compare to a base experiment, the values
+                    %of A_measure_agesum_sum are here changed to
+                    %differences to B_measure_agesum_sum
+                    if compare==1
+                        A_measure_agesum_sum=B_measure_agesum_sum-A_measure_agesum_sum;
+                    end
+                    
+                    %if matlab shall show measures as proportions to a base experiment, 
+                    %the values of A_measure_agesum_sum are here changed to proportions 
+                    %with respect to B_measure_agesum_sum
+                    if proportion==1
+                        A_measure_agesum_sum=A_measure_agesum_sum./B_measure_agesum_sum;
+                    end
+                    
                     X(:,colnr)=A_measure_agesum_sum;
                     Label{colnr}=strcurrent;
                 end

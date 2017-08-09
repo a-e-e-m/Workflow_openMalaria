@@ -20,7 +20,7 @@ Yaxmin=zeros(P2_dim);
 E_stored=cell(P1_dim, P2_dim, I1_dim*I2_dim, 3);
 
 %fontsizes
-plotfs = 4.5;
+plotfs = 5.5;
 titlefs = 10;
 
 
@@ -47,6 +47,10 @@ if numel(I(:,1))>2;
 end
 
 
+            kstar=0; %prepare counter to check if for this situation (i.e. this n,p-iteration) base experiment has already passed
+            lstar=0;
+
+
 %two runs to align the y-axis in the second one
 for run=1:1:2;
     clf
@@ -70,7 +74,7 @@ for run=1:1:2;
             %for this experiment are generated here and the data is loaded
             %and the values for measure==id is extracted
             %output for this part is: B_measure
-            if compare==1
+            if compare==1 || proportion==1;
                E=D.*Bind;
                Eind=find(E);
                
@@ -111,7 +115,7 @@ for run=1:1:2;
             
             base_contr=0;   %prepared counter to check if for this situation (i.e. this n,p-iteration) base experiment has already passed (base_contr=1) or not (base_contr=0)
                                     %will stay 0 if compare==0.
-            
+                                    
                                     
             for k=1:I1_dim; %loop over number of values for I1
                 for l=1:I2_dim; %loop over number of values for I2
@@ -131,9 +135,9 @@ for run=1:1:2;
                         if compare==1
                            DBind=D.*Bind;
                            if E==DBind
-                               base_contr=1;
-                               kstar=k;
-                               lstar=l;
+                               base_contr=1; %to recognise in the first run that base experiment has passed
+                               kstar=k; %to recognise in the second run that base experiment has passed
+                               lstar=l; %to recognise in the second run that base experiment has passed
                               continue
                            end
                            clear DBind
@@ -150,9 +154,9 @@ for run=1:1:2;
                         E_stored{n,p,colnr,3}=Eind; %index vector of experiment
                     
                     elseif run==2;
-                    if k==kstar && l==lstar;
+                    if k==kstar && l==lstar; %recgonises if base experiment is passing 
                        base_contr=1;
-                    continue
+                       continue
                     end
                     colnr=(k-1)*I2_dim+l-base_contr;     %gives the column corresponding to k,l
                                                              %if compare==1 and base experiment has already passed (and hence this l-iteration skipped), then colnr is adjusted 
@@ -198,6 +202,13 @@ for run=1:1:2;
                     %of A_measure are here changed to differences to B_measure
                     if compare==1
                         A_measure(:,:,4)=B_measure(:,:,4)-A_measure(:,:,4);
+                    end
+                    
+                    %if matlab shall show measures as proportions to a base experiment, 
+                    %the values of A_measure are here changed to proportions 
+                    %with respect to B_measure
+                    if proportion==1
+                        A_measure(:,:,4)=A_measure(:,:,4)./B_measure(:,:,4);
                     end
 
                     %searches for the age group "age" if specified and else sums up over 
@@ -261,11 +272,28 @@ for run=1:1:2;
             hx  = xlabel('Intervention');
             ylabbel=id_name;
             if person==1
-                ylabbel=strcat(ylabbel, 'per person');
+                ylabbel=[ylabbel, 'per person '];
             end
             if year==1
-                ylabbel=strcat(ylabbel, 'per year');
+                ylabbel=[ylabbel, 'per year '];
             end
+            
+            if compare==1
+                ylabbel=[ylabbel, 'as difference to '];
+            end
+            
+            if compare==1 && proportion==1
+                ylabbel=[ylabbel, 'and '];
+            end
+            
+            if proportion==1
+                ylabbel=[ylabbel, 'proportional to '];
+            end
+            
+            if compare==1 || proportion==1
+                ylabbel=[ylabbel, 'base experiment'];
+            end
+            
             hy = ylabel(ylabbel);
 
             tit=E_stored{n,p,colnr,1};

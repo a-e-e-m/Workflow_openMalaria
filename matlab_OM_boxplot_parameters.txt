@@ -47,7 +47,11 @@ I=repellent_deterrency=deterrency=0_7=0.7
 %insert "compare=0" else.
 compare=1
 
-%If compare=1, insert here the specific experiment you want to compare to 
+%Please insert "proportional=1" if you want to show the measures as 
+%proportion with respect to those of one specific experiment.
+proportion=1
+
+%If compare=1 or proportional=1, insert here the specific experiment you want to compare to 
 %in the form "base=parameter=parameterlabel=value=valuelabel"
 %use one line per parameter (you need to do this for every intervention 
 %parameter that occours in the output).
@@ -55,8 +59,6 @@ base=traps=T=reference=0
 base=repellent=R=reference=0
 base=trap_avail=trap_avail=reference=arab0.3, gamb 0.7, fune 1
 base=repellent_deterrency=deterrency=0_7=0.7
-
-
 
 %for B_load_output
 
@@ -88,13 +90,13 @@ id=14=nUncomp
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
-person=1
+person=0
 population=10000
 
 %Please indicate whether you want to measure per year i.e to average over 
 %the time between start and finito
 %type year=0 for no and year=1 for yes
-year=1
+year=0
 
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=./R10_boxplot_nUncomp_pp_pa_comparetobase.pdf
+pdfname=./R10_boxplot_nUncomp_comp_prop_base.pdf

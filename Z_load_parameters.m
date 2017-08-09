@@ -98,8 +98,13 @@ end
 compare_found=find(strcmp(Para{1,1},'compare'),1);
 compare=str2double(Para{1, 2}{compare_found});
 
-%load base experiment if compare==1
-if compare==1
+%Find 'proportion' that tells whether to compare measures to a reference
+%Experiment
+proportion_found=find(strcmp(Para{1,1},'proportion'),1);
+proportion=str2double(Para{1, 2}{proportion_found});
+
+%load base experiment if compare==1 or proportion==1
+if compare==1 || proportion==1;
     base_found=find(strcmp(Para{1,1},'base'));
     %test whether base experiment is properly defined
     if numel(base_found)~=I_unique_dim

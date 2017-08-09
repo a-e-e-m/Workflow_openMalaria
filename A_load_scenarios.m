@@ -59,4 +59,14 @@ for i=1:1:numel(I(:,1));
     I{i,6}=numel(I_i_inC_unique); %number of different values of parameter I{i,1} occuring in the scenarios 
 end
 
-
+%if compare==1 find index vector for base experiment
+if compare==1
+    B=ones(1,s); %prepare index vector of base experiment
+    B_label=''; %prepare label of base experiment
+    for i=1:1:numel(base(:,1));
+        base_i_columninC_found=find(strcmp([C{1,:}], base{i,1})); %gives index of the column of C corresponding to parameter base{i,1}
+        B_temp=strcmp(C{2,base_i_columninC_found}, base{i,3});
+        B=B.*B_temp'; %index vector of base experiment
+        B_label=[B_label, ' ', base{i,2}, base{i,4}] %label of base experiment
+    end
+end

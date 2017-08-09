@@ -93,6 +93,26 @@ for i=1:1:I_unique_dim
    clear Para_1_5_I
 end
 
+%Find 'compare' that tells whether to compare measures to a reference
+%Experiment
+compare_found=find(strcmp(Para{1,1},'compare'),1);
+compare=str2double(Para{1, 2}{compare_found});
+
+%load base experiment if compare==1
+if compare==1
+    base_found=find(strcmp(Para{1,1},'base'));
+    %test whether base experiment is properly defined
+    if numel(base_found)~=I_unique_dim
+        'base experiment not properly defined'
+        return 
+    end
+    
+    base=cell(I_unique_dim,4);
+    base(:,1)=Para{1,2}(base_found); %parameters for base experiment
+    base(:,2)=Para{1,3}(base_found); %labels of parameters for base experiment
+    base(:,3)=Para{1,4}(base_found); %values of parameters for base experiment
+    base(:,4)=Para{1,5}(base_found); %labels of values of parameters for base experiment
+end
 
 
 %for B_load_output

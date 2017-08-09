@@ -26,11 +26,14 @@ titlefs = 10;
 
 %Taking into account the parameters others than P1,P2,I1,I2
 D0=ones(1,s); %preparing index vector
+D0str=''; %prepared to construct label of experiment
+
 
 %loop over the scenario parameters OTHERS than P1, P2 if there are some
 if numel(P(:,1))>2;
     for i=3:1:numel(P(:,1));
         D0=D0.*P{i,5}; %herefore scenario parameters OTHERS than P1, P2 are really not allowed to have more than one value
+        D0str=[D0str '  ' P{i,2}, ': ', cell2mat(P{i,4})];
     end
 end
     
@@ -39,6 +42,7 @@ end
 if numel(I(:,1))>2;
     for i=3:1:numel(I(:,1));
         D0=D0.*I{i,5}; %herefore intervention parameters OTHERS than I1, I2 are really not allowed to have more than one value
+        D0str=[D0str '  ' I{i,2}, ': ', cell2mat(I{i,4})];
     end
 end
 
@@ -71,13 +75,14 @@ for run=1:1:2;
                         str1=strcat(I{1,2},I{1,4}{k});
                         str2=strcat(I{2,2},I{2,4}{l});
                         strcurrent=[str1, ' ', str2];
+                        
 
                         %index vector for experiment
                         E=D.*I{1,5}(k,:).*I{2,5}(l,:);
                         Eind=find(E);       
 
                         %store those
-                        E_stored{n,p,colnr,1}=strcat(P{1,2}, ': ', P{1,4}(n), '__', P{2,2}, ': ', P{2,4}(p)); %label of situation
+                        E_stored{n,p,colnr,1}=[P{1,2}, ': ', cell2mat(P{1,4}(n)), '   ', P{2,2}, ': ', cell2mat(P{2,4}(p)), sprintf('\n'), D0str]; %label of situation
                         E_stored{n,p,colnr,2}=strcurrent; %label of experiment "without situation"
                         E_stored{n,p,colnr,3}=Eind; %index vector of experiment
                     end

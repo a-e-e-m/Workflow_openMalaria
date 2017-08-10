@@ -86,11 +86,11 @@ finito=0
 %Please insert the id of the output measure you want to look at
 %in the form id=number=name
 %the name will be the label of the y-axis together with the specs below
-id=14=nUncomp
+id=36=sim EIR
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
-person=1
+person=0
 population=10000
 
 %Please indicate whether you want to measure per year i.e to average over 
@@ -107,7 +107,7 @@ yaxis=0
 %%In order to get monthly EIR from measure 36, scale by 6.0833.
 %%Additionally, if you want to get annual EIR choose year=1, then the codes 
 %%sumes up the monthly values and divides by the number of years.
-scaling=1
+scaling=6.0833
 
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=../R10_boxplot_nUncomp_pp_pa_comp_prop_2017_2035.pdf
+pdfname=../R10_boxplot_simEIR_pa_comp_prop_2017_2035_new.pdf

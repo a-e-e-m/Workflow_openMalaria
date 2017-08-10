@@ -158,6 +158,9 @@ for run=1:1:2;
                         years=(finito-start)/12;
                         B_measure_agesum_sum=B_measure_agesum_sum/years;
                     end
+                    
+                    %scaling by the manually inserted factor
+                    B_measure_agesum_sum=scaling*B_measure_agesum_sum;
                
             end
             
@@ -285,6 +288,10 @@ for run=1:1:2;
 
                     %summing up values over survey timesteps
                     A_measure_agesum_sum=sum(squeeze(A_measure_agesum(:,:,2)),2);
+                    
+                    %scaling with the manually inserted factor (which is 1
+                    %if not inserted)
+                    A_measure_agesum_sum=scaling*A_measure_agesum_sum;
 
                     %divides by the population size if demanded
                     if person==1
@@ -311,7 +318,7 @@ for run=1:1:2;
                         A_measure_agesum_sum=A_measure_agesum_sum./B_measure_agesum_sum;
                     end
                     
-                    X(:,colnr)=scaling*A_measure_agesum_sum;
+                    X(:,colnr)=A_measure_agesum_sum;
                     Label{colnr}=strcurrent;
                 end
             end 

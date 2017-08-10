@@ -11,7 +11,7 @@ close
 
 %clear some variables
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clearvars -except E_stored path_output name id id_name person population;
+clearvars -except E_stored path_output name id id_name person population ylabbel;
 
 %loading things
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,6 +66,15 @@ if numel(saveas_found)~=0;
 saveas=Para_followup_plot{1,2}{saveas_found};
 end
 
+%finds a manually inserted label for the y-axis if there is one
+yaxis_found=find(strcmp(Para_followup_plot{1,1},'yaxis'));
+yaxis=Para_followup_plot{1,2}{yaxis_found};
+
+%finds a manually inserted scaling factor
+scaling_found=find(strcmp(Para_followup_plot{1,1},'scaling'));
+scaling=str2double(Para_followup_plot{1,2}{scaling_found});
+
+
 
 %plotting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,8 +98,9 @@ for u=1:1:U_dim;
         datanr=Eind(i)-1;
         output_path=strrep(strcat(path_output,'/wu',name,'_',num2str(datanr),'_out.txt'), '\', '/');
         fileID = fopen(output_path);
-        AA(:,:)=cell2mat(textscan(fileID, '%f %f %f %f', 'HeaderLines', startline-1, 'Delimiter', ','));
+        AA=cell2mat(textscan(fileID, '%f %f %f %f', 'HeaderLines', startline-1, 'Delimiter', ','));
         fclose(fileID);
+        AA=AA(1:finitoline-startline+1,:);
         A(i,:,:)=AA;
     end
     
@@ -146,7 +156,7 @@ for u=1:1:U_dim;
 
     
     X=1905+A_measure_agesum_median(:,1)/12;
-    Y=A_measure_agesum_median(:,2);
+    Y=scaling*A_measure_agesum_median(:,2);
     
     %checks what plot to use
     if strcmp(plotmode,'subplot')==1
@@ -164,21 +174,20 @@ for u=1:1:U_dim;
     end
     
     %gives the name of the uth experiment 
-    Experiment_name=strcat(E_stored{indexa, indexb, indexc, 1}, E_stored{indexa, indexb, indexc, 2});
+    Experiment_name=[E_stored{indexa, indexb, indexc, 1}, sprintf('\n'), E_stored{indexa, indexb, indexc, 2}, ' ', '(median over ',num2str(Eind_dim),' scenarios)'];
     
     plotfs = 5;
-    Title=title(strcat(Experiment_name,' ','(median over',num2str(Eind_dim),'scenarios)'), 'Interpreter', 'none');
+    Title=title(Experiment_name, 'Interpreter', 'none');
     set(Title, 'FontSize', plotfs);
     
     %label of x-axis
     hx  = xlabel('years');
     
-    %label of y-axis
-    ylabbel=id_name;
-    if person==1
-        ylabbel=strcat(ylabbel, ' per person');
+    if strcmp(yaxis,'0')~=1;
+       ylabbel=yaxis;
     end
-    hy = ylabel(ylabbel);
+    
+    hy = ylabel(ylabbel); %ylabbel is from D_boxplot.m
     
     set(hx,'FontSize', plotfs);
     set(hy,'FontSize',plotfs);

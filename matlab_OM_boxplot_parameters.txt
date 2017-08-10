@@ -45,11 +45,11 @@ I=repellent_deterrency=deterrency=0_7=0.7
 %Please insert "compare=1" if you want to look - within every situation - 
 %at differences of the measures with respect to those of one specific experiment.
 %insert "compare=0" else.
-compare=1
+compare=0
 
 %Please insert "proportional=1" if you want to show the measures as 
 %proportion with respect to those of one specific experiment.
-proportion=1
+proportion=0
 
 %If compare=1 or proportional=1, insert here the specific experiment you want to compare to 
 %in the form "base=parameter=parameterlabel=value=valuelabel"
@@ -86,11 +86,11 @@ finito=0
 %Please insert the id of the output measure you want to look at
 %in the form id=number=name
 %the name will be the label of the y-axis together with the specs below
-id=14=nUncomp
+id=36=nUncomp
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
-person=1
+person=0
 population=10000
 
 %Please indicate whether you want to measure per year i.e to average over 
@@ -98,5 +98,16 @@ population=10000
 %type year=0 for no and year=1 for yes
 year=1
 
+%If you want to set the labe of the y-Axis manually, enter the label here 
+%in the form "yaxis=your_label", else enter yaxis=0.
+yaxis=sim EIR p.a. 
+
+%If you want to scale the values manually, insert here the scaling factor 
+%in the form "scaling=your_value", else enter "scaling=1".
+%%In order to get monthly EIR from measure 36, scale by 6.0833.
+%%Additionally, if you want to get annual EIR choose year=1, then the codes 
+%%sumes up the monthly values and divides by the number of years.
+scaling=6.0833
+
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=./R10_boxplot_nUncomp_pp_pa_comp_prop_base.pdf
+pdfname=../R10_boxplot_simEIR_pa_2017_2035.pdf

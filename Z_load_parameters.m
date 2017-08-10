@@ -180,6 +180,14 @@ population=str2double(Para{1, 2}{population_found});
 year_found=find(strcmp(Para{1,1},'year'),1);
 year=str2double(Para{1, 2}{year_found});
 
+%finds a manually inserted label for the y-axis if there is one
+yaxis_found=find(strcmp(Para{1,1},'yaxis'));
+yaxis=Para{1,2}{yaxis_found};
+
+%finds a manually inserted scaling factor
+scaling_found=find(strcmp(Para{1,1},'scaling'));
+scaling=str2double(Para{1,2}{scaling_found});
+
 %Find 'pdfname', the path and name of the pdf matlab shall print
 pdfname_found=find(strcmp(Para{1,1},'pdfname'),1);
 pdfname=Para{1, 2}{pdfname_found};

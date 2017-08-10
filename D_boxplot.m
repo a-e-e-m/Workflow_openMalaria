@@ -98,6 +98,7 @@ for run=1:1:2;
                    fileID = fopen(output_path);
                    BB=cell2mat(textscan(fileID, '%f %f %f %f', 'HeaderLines', startline-1, 'Delimiter', ','));
                    fclose(fileID);
+                   BB=BB(1:finitoline-startline+1,:);
                    B(i,:,:)=BB;
                    clear BB
                end
@@ -235,6 +236,7 @@ for run=1:1:2;
                         fileID = fopen(output_path);
                         AA=cell2mat(textscan(fileID, '%f %f %f %f', 'HeaderLines', startline-1, 'Delimiter', ','));
                         fclose(fileID);
+                        AA=AA(1:finitoline-startline+1,:);
                         A(i,:,:)=AA;
                         clear AA
                     end
@@ -309,7 +311,7 @@ for run=1:1:2;
                         A_measure_agesum_sum=A_measure_agesum_sum./B_measure_agesum_sum;
                     end
                     
-                    X(:,colnr)=A_measure_agesum_sum;
+                    X(:,colnr)=scaling*A_measure_agesum_sum;
                     Label{colnr}=strcurrent;
                 end
             end 
@@ -322,7 +324,7 @@ for run=1:1:2;
             hx  = xlabel('Intervention');
             ylabbel=id_name;
             if person==1
-                ylabbel=[ylabbel, 'per person '];
+                ylabbel=[ylabbel, ' per person '];
             end
             if year==1
                 ylabbel=[ylabbel, 'per year '];
@@ -342,6 +344,10 @@ for run=1:1:2;
             
             if compare==1 || proportion==1
                 ylabbel=[ylabbel, 'base experiment'];
+            end
+            
+            if strcmp(yaxis,'0')~=1;
+                ylabbel=yaxis;
             end
             
             hy = ylabel(ylabbel);

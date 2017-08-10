@@ -74,6 +74,17 @@ yaxis=Para_followup_plot{1,2}{yaxis_found};
 scaling_found=find(strcmp(Para_followup_plot{1,1},'scaling'));
 scaling=str2double(Para_followup_plot{1,2}{scaling_found});
 
+%finds whether scaling of y-axis is manually set
+yaxmanual_found=find(strcmp(Para_followup_plot{1,1},'yaxmanual'));
+yaxmanual=str2double(Para_followup_plot{1,2}{yaxmanual_found});
+
+%finds the minimal value for manually set scaling of y-axis
+yaxmin_found=find(strcmp(Para_followup_plot{1,1},'yaxmin'));
+yaxmin=str2double(Para_followup_plot{1,2}{yaxmin_found});
+
+%finds the minimal value for manually set scaling of y-axis
+yaxmax_found=find(strcmp(Para_followup_plot{1,1},'yaxmax'));
+yaxmax=str2double(Para_followup_plot{1,2}{yaxmax_found});
 
 
 %plotting
@@ -180,9 +191,17 @@ for u=1:1:U_dim;
     Title=title(Experiment_name, 'Interpreter', 'none');
     set(Title, 'FontSize', plotfs);
     
+    %set scaling of the y-axis if yaxis is scaled manually
+    if yaxmanual==1;
+        haha=gca;
+         haha.YLim=[yaxmin yaxmax];
+    end
+    
     %label of x-axis
     hx  = xlabel('years');
     
+    %label of y-axis
+    %overwrite ylabbel if yaxis is not 0
     if strcmp(yaxis,'0')~=1;
        ylabbel=yaxis;
     end

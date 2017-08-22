@@ -29,14 +29,15 @@ P=shares_species=dom. species=fune=fune
 %Only the first two parameters can have several values, from the third on 
 %they cannot have more than one value. 
 %The order of the values given here will be preserved.
-I=traps=T=reference=0
-I=traps=T=0_2=0.2
-%I=traps=T=0_4=0.4
-
 I=repellent=R=reference=0
 I=repellent=R=0_3=0.3
 I=repellent=R=0_5=0.5
 I=repellent=R=0_7=0.7
+
+I=traps=T=reference=0
+I=traps=T=0_2=0.2
+%I=traps=T=0_4=0.4
+
 
 I=trap_avail=trap_avail=reference=arab0.3, gamb 0.7, fune 1
 
@@ -78,15 +79,17 @@ age=0
 
 %Please insert at what survey time step you want to start the analysis 
 start=1344
+%note: month 1344 is year 2017 ie start of push-pull
 
 %Please insert at what survey time step you want to end the analysis 
 %Insert 0 if you want to analysis all the timesteps after start until the end
-finito=0
+finito=1380
+%note: month 1380 is year 2020
 
 %Please insert the id of the output measure you want to look at
 %in the form id=number=name
 %the name will be the label of the y-axis together with the specs below
-id=36=sim EIR
+id=14=nUncomp
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
@@ -96,7 +99,7 @@ population=10000
 %Please indicate whether you want to measure per year i.e to average over 
 %the time between start and finito
 %type year=0 for no and year=1 for yes
-year=1
+year=0
 
 %If you want to set the labe of the y-Axis manually, enter the label here 
 %in the form "yaxis=your_label", else enter yaxis=0.
@@ -107,7 +110,7 @@ yaxis=0
 %%In order to get monthly EIR from measure 36, scale by 6.0833.
 %%Additionally, if you want to get annual EIR choose year=1, then the codes 
 %%sumes up the monthly values and divides by the number of years.
-scaling=6.0833
+scaling=1
 
 %Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=../R10_boxplot_simEIR_pa_comp_prop_2017_2035_new.pdf
+pdfname=../regression1.pdf

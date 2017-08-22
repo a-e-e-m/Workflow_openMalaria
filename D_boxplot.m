@@ -19,6 +19,11 @@ Yaxmin=zeros(P2_dim);
 %preparing a cell array to store the scenario numbers per experiment
 E_stored=cell(P1_dim, P2_dim, I1_dim*I2_dim, 3);
 
+%prepare a cell array to store data behind the boxplot 
+%for every situation (n,p) and every experiment (k, l) the 
+%the following data is stored: str1, str2, colnr, datapoints
+R=cell(P1_dim, P2_dim, I1_dim, I2_dim,4);
+
 %fontsizes
 plotfs = 5.5;
 titlefs = 10;
@@ -161,6 +166,7 @@ for run=1:1:2;
                     
                     %scaling by the manually inserted factor
                     B_measure_agesum_sum=scaling*B_measure_agesum_sum;
+                    
                
             end
             
@@ -320,6 +326,19 @@ for run=1:1:2;
                     
                     X(:,colnr)=A_measure_agesum_sum;
                     Label{colnr}=strcurrent;
+                    
+                    %store raw data in R
+                    R{n,p,k,l,1}=colnr;
+                    R{n,p,k,l,2}=str1;
+                    R{n,p,k,l,3}=str2;
+                    R{n,p,k,l,4}=A_measure_agesum_sum;
+                    
+                        %store data for base experiment if there is one
+                        if compare==1 || proportion==1;
+                           R{n,p,kstar,lstar,4}=zeros(nseeds,1);
+                        end
+                    
+                    
                 end
             end 
             plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
@@ -377,7 +396,7 @@ for run=1:1:2;
                 %aligns the scaling of the Y-axis 
                 ha.YLim=[Yaxmin(n) Yaxmax(n)];						  							  
             end
-
+            
 
             clear D
             clear E

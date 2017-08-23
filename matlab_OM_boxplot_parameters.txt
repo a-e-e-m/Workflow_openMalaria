@@ -29,14 +29,15 @@ P=shares_species=dom. species=fune=fune
 %Only the first two parameters can have several values, from the third on 
 %they cannot have more than one value. 
 %The order of the values given here will be preserved.
-I=repellent=R=reference=0
-I=repellent=R=0_3=0.3
-I=repellent=R=0_5=0.5
-I=repellent=R=0_7=0.7
 
 I=traps=T=reference=0
 I=traps=T=0_2=0.2
 %I=traps=T=0_4=0.4
+
+I=repellent=R=reference=0
+I=repellent=R=0_3=0.3
+I=repellent=R=0_5=0.5
+I=repellent=R=0_7=0.7
 
 
 I=trap_avail=trap_avail=reference=arab0.3, gamb 0.7, fune 1

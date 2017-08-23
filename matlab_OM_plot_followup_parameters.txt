@@ -1,0 +1,59 @@
+%This file is for follow up analysis of the boxplot 
+%and specifies for which experiments the dynamics over time should be plotted
+
+%Please insert at what survey time step you want to start the analysis 
+start=1140
+%note month 1140 is year 2000
+
+%Please insert at what survey time step you want to end the analysis 
+%Insert 0 if you want to analysis all the timesteps after start until the end
+finito=0
+
+%Please insert for which experiments the dynamics over time should be plotted
+%Use the following format 
+%timeplot=n,p,colnr
+%where No is just an ongoing number starting from 1, 
+%n is the number of the row of the experiment in the subplot,
+%p is the number of the column of the experiment in the subplot,
+%and colnr is the number of the box of the experiment in the boxplot.
+timeplot=2,3,1
+timeplot=2,3,2
+timeplot=2,3,3
+timeplot=2,3,4
+timeplot=2,3,5
+timeplot=2,3,6
+timeplot=2,3,7
+timeplot=2,3,8
+
+%Please insert plotmode=subplot if you want to plot the experiments into one subplot
+%and plotmode=jpeg if you want to plot the experiments into seperate jpeg files 
+plotmode=png
+
+%Please insert the number of the age group you want to look at 
+%in the form age=number
+%insert Age=0 if you want to sum over all age groups considered by the 
+%given measure (id)
+age=0
+
+%If you want to set the scaling of the y-axis manually, insert
+%"yaxmanual=1", else insert "yaxmanual=0".
+yaxmanual=1
+
+%If yaxmanual=1, insert here the minimal and maximal value of the y-axis
+%in the form "yaxmin=yourvalue" and "yaxmax=yourvalue" on two separate lines.
+yaxmin=0
+yaxmax=0.18
+
+%If you want to set the labe of the y-Axis manually, enter the label here 
+%in the form "yaxis=your_label", else enter yaxis=0.
+yaxis=uncomp cases per person per month
+
+%If you want to scale the values manually, insert here the scaling factor 
+%in the form "scaling=your_value", else enter "scaling=1".
+scaling=1
+
+
+%in case of plotmode=subplot, Please insert name and path of the pdf 
+%in the format path/filename.pdf 
+saveas=../plots for nUncomp/R10_250_fune_timeplot_nUncomp_pp_pa_2000_2035_withbase.pdf
+

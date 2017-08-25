@@ -54,8 +54,15 @@ end
 
 %two runs to align the y-axis in the second one
 for run=1:1:2;
+
+    %suppresses second run if scaling of y axis is set manually
+    if yaxmanual==1 && run==2
+        continue 
+    end
+    
     clf
     close
+    
     for n=1:P1_dim; %loop over the number of values for P1
         %note that for fix n, P1 is fix
         for p=1:P2_dim; %loop over the number of values for P1
@@ -380,9 +387,13 @@ for run=1:1:2;
             hy = ylabel(ylabbel);
 
             tit=E_stored{n,p,colnr,1};
+            
+            %if showtitle=1, then set title of plot
+            if showtitle==1
             Title=title(tit, 'Interpreter', 'none');
-
             set(Title, 'FontSize', titlefs);
+            end 
+            
             set(hx,'FontSize', plotfs);
             set(hy,'FontSize',plotfs);
 
@@ -391,8 +402,14 @@ for run=1:1:2;
             ha.XTickLabelRotation = labelrotation;
 
             if run==1;
+                
+                %if yaxmanual==1, then scaling of y axis is set manually 
+                if yaxmanual==1
+                ha.YLim=[yaxmin yaxmax];
+                else
                 %stores the scaling of the Y-axis for this subplot
-                Yax(n,p,:)=ha.YLim;    
+                Yax(n,p,:)=ha.YLim; 
+                end
             else    
                 %aligns the scaling of the Y-axis 
                 ha.YLim=[Yaxmin(n) Yaxmax(n)];

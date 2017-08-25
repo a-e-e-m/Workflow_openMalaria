@@ -184,6 +184,18 @@ year=str2double(Para{1, 2}{year_found});
 yaxis_found=find(strcmp(Para{1,1},'yaxis'));
 yaxis=Para{1,2}{yaxis_found};
 
+%finds whether scaling of y-axis is manually set
+yaxmanual_found=find(strcmp(Para{1,1},'yaxmanual'));
+yaxmanual=str2double(Para{1,2}{yaxmanual_found});
+
+%finds the minimal value for manually set scaling of y-axis
+yaxmin_found=find(strcmp(Para{1,1},'yaxmin'));
+yaxmin=str2double(Para{1,2}{yaxmin_found});
+
+%finds the minimal value for manually set scaling of y-axis
+yaxmax_found=find(strcmp(Para{1,1},'yaxmax'));
+yaxmax=str2double(Para{1,2}{yaxmax_found});
+
 %finds a manually inserted scaling factor
 scaling_found=find(strcmp(Para{1,1},'scaling'));
 scaling=str2double(Para{1,2}{scaling_found});
@@ -191,6 +203,10 @@ scaling=str2double(Para{1,2}{scaling_found});
 %Find 'subplotmode' that tell whether to use subplotmode or not
 subplotmode_found=find(strcmp(Para{1,1},'subplotmode'),1);
 subplotmode=str2double(Para{1, 2}{subplotmode_found});
+
+%Find 'showtitle' that tell whether to print titles or not
+showtitle_found=find(strcmp(Para{1,1},'showtitle'),1);
+showtitle=str2double(Para{1, 2}{showtitle_found});
 
 %Find 'plotfs', the font size of the labels in the plots
 plotfs_found=find(strcmp(Para{1,1},'plotfs'),1);

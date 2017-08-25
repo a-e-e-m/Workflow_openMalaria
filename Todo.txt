@@ -24,9 +24,9 @@ not important
 6s  make the start date (currently 1905) general
 not important
 
-7s  include a parameter for label rotation
+x  include a parameter for label rotation
 
-7.5s include a parameter for font size
+x include a parameter for font size
 
 8! add compare and proportional to timeplot or at least make remark that if
    this is in boxplot, the ylabbel from there will be wrong in the timeplot.
@@ -38,14 +38,12 @@ changing the output nr) and to edit the scenarios.csv file
 0  add remote to directory
 ?
 
-10 boxplot also with jpeg-subplot switch
-yes, and include also png if not yet working (also check for timeplot)
+x boxplot also with jpeg-subplot switch
 
 12?clear variables that are no longer needed?
 not important
 
-   make it possible to give title (also no title) manually
-Do
+x   make it possible to show no titles
 
 11 improve data structure of Para, etc. (1x6 to 78x6)
 not important

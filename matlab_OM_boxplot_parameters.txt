@@ -107,6 +107,15 @@ year=0
 %in the form "yaxis=your_label", else enter yaxis=0.
 yaxis=0
 
+%If you want to set the scaling of the y-axis manually, insert
+%"yaxmanual=1", else insert "yaxmanual=0".
+yaxmanual=1
+
+%If yaxmanual=1, insert here the minimal and maximal value of the y-axis
+%in the form "yaxmin=yourvalue" and "yaxmax=yourvalue" on two separate lines.
+yaxmin=-0.05
+yaxmax=0.25
+
 %If you want to scale the values manually, insert here the scaling factor 
 %in the form "scaling=your_value", else enter "scaling=1".
 %%In order to get monthly EIR from measure 36, scale by 6.0833.
@@ -120,6 +129,10 @@ scaling=1
 %the name of one plot will be composed of the filename given below and the 
 %name of the setting as printed in the title of the plot
 subplotmode=1
+
+%Please insert showtitle=0 if you dont want to print titles,
+%else insert showtitle=1
+showtitle=1
 
 %Please insert the font size of the labels in the plots in the form
 %plotfs=yoursize
@@ -143,4 +156,4 @@ fileformat=png
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=../R10_boxplot_nUncomp_comp_prop_2017_2035_portrait
+filename=../axetest

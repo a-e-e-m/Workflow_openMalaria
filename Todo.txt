@@ -1,52 +1,56 @@
+2   insert switch to either show base experiment or not
+
+1  add bottom 5% and top 5% to timeplot
+ok if after TAG
+
+3  put data load and modifications into a function
+only if there is really time and if I anyway have to work on the code again
+
+(4)s  show somewhere information what base experiment is (if compare==1)
+not important
+
+(5)s  show somewhere on the boxplot over how many years it goes
+not important
+
+(6)s  make the start date (currently 1905) general
+
+
+8! add compare and proportional to timeplot or at least make remark that if
+   this is in boxplot, the ylabbel from there will be wrong in the timeplot.
+
+
+(12) clear variables that are no longer needed?
+
+(11) improve data structure of Para, etc. (1x6 to 78x6)
+
+
+
+
+
+
+
+
+x change data loading so that data from different simulations can be used?
+not needed, as it is probably easier to merge two output folders (after
+changing the output nr) and to edit the scenarios.csv file
+
 x  see if same values for different parameters can cause confusions. NO
 
 x  averted cases proportional 
 
 x  parameters others than P1,P2,I1,I2 into titles
 
-   insert switch to either show base experiment or not
-
-1  add bottom 5% and top 5% to timeplot
-ok if after TAG
-
-2  make it possible for the boxplot, too, to set the y-axis min max or align over all plots
-Do
-
-3  put data load and modifications into a function
-only if there is really time and if I anyway have to work on the code again
-
-4s  show somewhere information what base experiment is (if compare==1)
-not important
-
-5s  show somewhere on the boxplot over how many years it goes
-not important
-
-6s  make the start date (currently 1905) general
-not important
+x  make it possible for the boxplot, too, to set the y-axis min max or align over all plots
 
 x  include a parameter for label rotation
 
 x include a parameter for font size
 
-8! add compare and proportional to timeplot or at least make remark that if
-   this is in boxplot, the ylabbel from there will be wrong in the timeplot.
-
-9? change data loading so that data from different simulations can be used?
-not needed, as it is probably easier to merge two output folders (after
-changing the output nr) and to edit the scenarios.csv file
-
-0  add remote to directory
-?
-
 x boxplot also with jpeg-subplot switch
-
-12?clear variables that are no longer needed?
-not important
 
 x   make it possible to show no titles
 
-11 improve data structure of Para, etc. (1x6 to 78x6)
-not important
+
 
 NOTE: Be aware that, if there are intervention parameters only applying if
 one specific intervention is in use, then there are actually more

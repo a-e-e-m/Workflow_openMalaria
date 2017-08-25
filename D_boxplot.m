@@ -404,12 +404,23 @@ for run=1:1:2;
             if run==1;
                 
                 %if yaxmanual==1, then scaling of y axis is set manually 
+                %and also print in separate prints desired
                 if yaxmanual==1
-                ha.YLim=[yaxmin yaxmax];
+                    ha.YLim=[yaxmin yaxmax];
+
+                    %print to separate files
+                    if subplotmode==0;
+                        printto=['-d' fileformat];
+                        plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p}];
+                        plotnamewithextension=[plotname '.' fileformat];
+                        print(gcf, printto, plotnamewithextension);
+                    end
+                
                 else
                 %stores the scaling of the Y-axis for this subplot
                 Yax(n,p,:)=ha.YLim; 
                 end
+                
             else    
                 %aligns the scaling of the Y-axis 
                 ha.YLim=[Yaxmin(n) Yaxmax(n)];
@@ -439,9 +450,19 @@ for run=1:1:2;
 end
 hh=gcf;
 
-set(hh,'PaperOrientation',paperorientation);
 
-%set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
+%paper settings if saved to pdf
+if strcmp(fileformat, 'pdf')==1
+    set(hh,'PaperOrientation',paperorientation);
+    
+    if strcmp(paperorientation, 'landscape')==1
+        paperposition=[-1.5 -0.5 32 22];
+    else
+        paperposition=[-0.5 -1.5 22 32];  
+    end
+    set(hh,'PaperPosition', paperposition);
+end
+
 
 printto=['-d' fileformat];
 filenamewithextension=[filename '.' fileformat];

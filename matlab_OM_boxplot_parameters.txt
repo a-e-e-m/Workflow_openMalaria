@@ -15,12 +15,13 @@ pathscen=..
 %More scenario parameters can be given, but have to be fixed to one
 %single value.
 %The order of the values given here will be preserved.
-P=scaled_annual_EIR=total EIR p.a.=200=200
-P=scaled_annual_EIR=total EIR p.a.=250=250
 
 P=shares_species=dom. species=arab=arab
 P=shares_species=dom. species=gamb=gamb
 P=shares_species=dom. species=fune=fune
+
+P=scaled_annual_EIR=total EIR p.a.=200=200
+P=scaled_annual_EIR=total EIR p.a.=250=250
 
 %Please insert the intervention parameters with its values and labels 
 %in the form I=parameter=parameterlabel=value=valuelabel
@@ -84,7 +85,7 @@ start=1344
 
 %Please insert at what survey time step you want to end the analysis 
 %Insert 0 if you want to analysis all the timesteps after start until the end
-finito=1380
+finito=0
 %note: month 1380 is year 2020
 
 %Please insert the id of the output measure you want to look at
@@ -113,5 +114,21 @@ yaxis=0
 %%sumes up the monthly values and divides by the number of years.
 scaling=1
 
-%Please insert name and path of the pdf in the forma path/filename.pdf 
-pdfname=../regression1.pdf
+%Please insert subplot=1 if you want to put all plots into one subplot
+%and insert subplot=0 if you want to save the plots as separate plots 
+%note that, if subplot=0, then the specifications below apply as well and 
+%the name of one plot will be composed of the filename given below and the 
+%name of the setting as printed in the title of the plot
+subplot=0
+
+%please insert the paper orientation you want to save the figure in, in the form
+%paperorientation=portrait or paperorientation=landscape
+paperorientation=portrait
+
+%please insert the format you want to save the figure in, in the form
+%fileformat=yourformat
+fileformat=png
+
+%Please insert name and relative path of the file to save in the form  
+%filename=relativepath/to/yourfilenamewithoutextension
+filename=../R10_boxplot_nUncomp_comp_prop_2017_2035_portrait

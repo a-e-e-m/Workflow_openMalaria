@@ -188,6 +188,18 @@ yaxis=Para{1,2}{yaxis_found};
 scaling_found=find(strcmp(Para{1,1},'scaling'));
 scaling=str2double(Para{1,2}{scaling_found});
 
-%Find 'pdfname', the path and name of the pdf matlab shall print
-pdfname_found=find(strcmp(Para{1,1},'pdfname'),1);
-pdfname=Para{1, 2}{pdfname_found};
+%Find 'subplot' that tell whether to use subplot or not
+subplot_found=find(strcmp(Para{1,1},'subplot'),1);
+subplot=str2double(Para{1, 2}{subplot_found});
+
+%Find 'fileformat', the format the figure shall be saved as
+paperorientation_found=find(strcmp(Para{1,1},'paperorientation'),1);
+paperorientation=Para{1, 2}{paperorientation_found};
+
+%Find 'fileformat', the format the figure shall be saved as
+fileformat_found=find(strcmp(Para{1,1},'fileformat'),1);
+fileformat=Para{1, 2}{fileformat_found};
+
+%Find 'filename', the path and name of the pdf matlab shall print
+filename_found=find(strcmp(Para{1,1},'filename'),1);
+filename=Para{1, 2}{filename_found};

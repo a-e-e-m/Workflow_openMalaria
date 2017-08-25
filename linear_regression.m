@@ -35,7 +35,7 @@ for n=1:1:P1_dim;
         
         plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
         subplot(P1_dim,P2_dim,plotnr)
-        p1=plot(Rr, R_median(1,:),'og');
+        p1=plot(Rr, R_median(1,:),'*g');
         p2=plot(Rr, R_median(2,:),'+r');
         
         hold on  
@@ -95,4 +95,12 @@ for n=1:1:P1_dim;
             
     end 
 end
+
+hh=gcf;
+
+%set(hh,'PaperOrientation','portrait');
+
+%set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
+
+print(gcf, '-dpng', '../linear_regression_2.png');
 

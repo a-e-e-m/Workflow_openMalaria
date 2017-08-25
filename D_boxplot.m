@@ -345,6 +345,8 @@ for run=1:1:2;
             %note that P2_dim is the length of the rows of the subplot
             subplot(P1_dim,P2_dim,plotnr);
             boxplot(X, 'labels', Label');
+            
+            print(gcf, '-dpng', 'separatetest');
 
             %subplot parameters
             hx  = xlabel('Intervention');
@@ -413,9 +415,11 @@ for run=1:1:2;
 end
 hh=gcf;
 
-set(hh,'PaperOrientation','landscape');
+set(hh,'PaperOrientation',paperorientation);
 
-set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
+%set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
-print(gcf, '-dpdf', pdfname);
+printto=['-d' fileformat];
+
+print(gcf, printto, filename);
 

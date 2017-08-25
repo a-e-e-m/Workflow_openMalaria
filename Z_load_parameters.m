@@ -188,9 +188,9 @@ yaxis=Para{1,2}{yaxis_found};
 scaling_found=find(strcmp(Para{1,1},'scaling'));
 scaling=str2double(Para{1,2}{scaling_found});
 
-%Find 'subplot' that tell whether to use subplot or not
-subplot_found=find(strcmp(Para{1,1},'subplot'),1);
-subplot=str2double(Para{1, 2}{subplot_found});
+%Find 'subplotmode' that tell whether to use subplotmode or not
+subplotmode_found=find(strcmp(Para{1,1},'subplotmode'),1);
+subplotmode=str2double(Para{1, 2}{subplotmode_found});
 
 %Find 'fileformat', the format the figure shall be saved as
 paperorientation_found=find(strcmp(Para{1,1},'paperorientation'),1);

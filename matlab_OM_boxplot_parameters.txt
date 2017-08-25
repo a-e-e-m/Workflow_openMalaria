@@ -119,7 +119,7 @@ scaling=1
 %note that, if subplot=0, then the specifications below apply as well and 
 %the name of one plot will be composed of the filename given below and the 
 %name of the setting as printed in the title of the plot
-subplot=0
+subplotmode=1
 
 %please insert the paper orientation you want to save the figure in, in the form
 %paperorientation=portrait or paperorientation=landscape

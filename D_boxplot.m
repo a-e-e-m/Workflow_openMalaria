@@ -343,12 +343,15 @@ for run=1:1:2;
             end 
             plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
             %note that P2_dim is the length of the rows of the subplot
-            subplot(P1_dim,P2_dim,plotnr);
-            boxplot(X, 'labels', Label');
             
-            print(gcf, '-dpng', 'separatetest');
+            if subplotmode==1
+                subplot(P1_dim,P2_dim,plotnr);
+            end
+            
+            boxplot(X, 'labels', Label');
 
-            %subplot parameters
+
+            %plot parameters
             hx  = xlabel('Intervention');
             ylabbel=id_name;
             if person==1
@@ -396,7 +399,15 @@ for run=1:1:2;
                 Yax(n,p,:)=ha.YLim;    
             else    
                 %aligns the scaling of the Y-axis 
-                ha.YLim=[Yaxmin(n) Yaxmax(n)];						  							  
+                ha.YLim=[Yaxmin(n) Yaxmax(n)];
+                
+                %print to separate files
+                if subplotmode==0;
+                printto=['-d' fileformat];
+                plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p}];
+                plotnamewithextension=[plotname '.' fileformat];
+                print(gcf, printto, plotnamewithextension);
+                end
             end
             
 
@@ -420,6 +431,6 @@ set(hh,'PaperOrientation',paperorientation);
 %set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
 printto=['-d' fileformat];
-
-print(gcf, printto, filename);
+filenamewithextension=[filename '.' fileformat];
+print(gcf, printto, filenamewithextension);
 

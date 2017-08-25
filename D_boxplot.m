@@ -24,10 +24,6 @@ E_stored=cell(P1_dim, P2_dim, I1_dim*I2_dim, 3);
 %the following data is stored: str1, str2, colnr, datapoints
 R=cell(P1_dim, P2_dim, I1_dim, I2_dim,4);
 
-%fontsizes
-plotfs = 5.5;
-titlefs = 10;
-
 
 %Taking into account the parameters others than P1,P2,I1,I2
 D0=ones(1,s); %preparing index vector
@@ -392,7 +388,7 @@ for run=1:1:2;
 
             ha = gca;
             set(ha, 'FontSize', plotfs); 
-            ha.XTickLabelRotation = 0;
+            ha.XTickLabelRotation = labelrotation;
 
             if run==1;
                 %stores the scaling of the Y-axis for this subplot

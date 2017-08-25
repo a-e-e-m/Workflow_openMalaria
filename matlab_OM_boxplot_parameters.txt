@@ -121,6 +121,18 @@ scaling=1
 %name of the setting as printed in the title of the plot
 subplotmode=1
 
+%Please insert the font size of the labels in the plots in the form
+%plotfs=yoursize
+plotfs=5.5
+
+%Please insert the font size of the title of the plots in the form
+%titlefs=yoursize
+titlefs=10
+
+%Please insert the angle about which the labels in the plots shall be rotated 
+%in the form labelrotation=yourangle where yourangle is measured in degrees 
+labelrotation=0
+
 %please insert the paper orientation you want to save the figure in, in the form
 %paperorientation=portrait or paperorientation=landscape
 paperorientation=portrait

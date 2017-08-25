@@ -192,6 +192,19 @@ scaling=str2double(Para{1,2}{scaling_found});
 subplotmode_found=find(strcmp(Para{1,1},'subplotmode'),1);
 subplotmode=str2double(Para{1, 2}{subplotmode_found});
 
+%Find 'plotfs', the font size of the labels in the plots
+plotfs_found=find(strcmp(Para{1,1},'plotfs'),1);
+plotfs=str2double(Para{1, 2}{plotfs_found});
+
+%Find 'titlefs', the font size of the titles in the plots
+titlefs_found=find(strcmp(Para{1,1},'titlefs'),1);
+titlefs=str2double(Para{1, 2}{titlefs_found});
+
+%Find 'labelrotation', the angle about which the labels in the plot shall be
+%rotated 
+labelrotation_found=find(strcmp(Para{1,1},'labelrotation'),1);
+labelrotation=str2double(Para{1, 2}{labelrotation_found});
+
 %Find 'fileformat', the format the figure shall be saved as
 paperorientation_found=find(strcmp(Para{1,1},'paperorientation'),1);
 paperorientation=Para{1, 2}{paperorientation_found};

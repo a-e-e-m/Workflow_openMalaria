@@ -210,7 +210,11 @@ for run=1:1:2;
                         Eind=find(E);       
 
                         %store those
-                        E_stored{n,p,colnr,1}=[P{1,2}, ': ', cell2mat(P{1,4}(n)), '   ', P{2,2}, ': ', cell2mat(P{2,4}(p)), sprintf('\n'), D0str]; %label of situation
+                        if shorttitle==0;
+                            E_stored{n,p,colnr,1}=[P{1,2}, ': ', cell2mat(P{1,4}(n)), '   ', P{2,2}, ': ', cell2mat(P{2,4}(p)), sprintf('\n'), D0str]; %label of situation
+                        else
+                            E_stored{n,p,colnr,1}=[P{1,2}, ': ', cell2mat(P{1,4}(n)), '   ', P{2,2}, ': ', cell2mat(P{2,4}(p))]; %label of situation
+                        end
                         E_stored{n,p,colnr,2}=strcurrent; %label of experiment "without situation"
                         E_stored{n,p,colnr,3}=Eind; %index vector of experiment
                     
@@ -355,6 +359,10 @@ for run=1:1:2;
 
 
             %plot parameters
+            ha = gca;
+            set(ha, 'FontSize', plotfs); 
+            ha.XTickLabelRotation = labelrotation;
+            
             hx  = xlabel('Intervention');
             ylabbel=id_name;
             if person==1
@@ -391,15 +399,9 @@ for run=1:1:2;
             %if showtitle=1, then set title of plot
             if showtitle==1
             Title=title(tit, 'Interpreter', 'none');
-            set(Title, 'FontSize', titlefs);
+            Title.FontSize = titlefs;
             end 
             
-            set(hx,'FontSize', plotfs);
-            set(hy,'FontSize',plotfs);
-
-            ha = gca;
-            set(ha, 'FontSize', plotfs); 
-            ha.XTickLabelRotation = labelrotation;
 
             if run==1;
                 

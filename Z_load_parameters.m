@@ -208,6 +208,10 @@ subplotmode=str2double(Para{1, 2}{subplotmode_found});
 showtitle_found=find(strcmp(Para{1,1},'showtitle'),1);
 showtitle=str2double(Para{1, 2}{showtitle_found});
 
+%Find 'shorttitle' that tell whether to print titles or not
+shorttitle_found=find(strcmp(Para{1,1},'shorttitle'),1);
+shorttitle=str2double(Para{1, 2}{shorttitle_found});
+
 %Find 'plotfs', the font size of the labels in the plots
 plotfs_found=find(strcmp(Para{1,1},'plotfs'),1);
 plotfs=str2double(Para{1, 2}{plotfs_found});

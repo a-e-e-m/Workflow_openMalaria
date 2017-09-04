@@ -11,6 +11,7 @@ for n=1:1:P1_dim;
         end
 
         R_median=median(R_data,3);
+        R_median=log(R_median);
 
         Rr=[0 0.3 0.5 0.7];
 
@@ -35,18 +36,18 @@ for n=1:1:P1_dim;
         
         plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
         subplot(P1_dim,P2_dim,plotnr)
-        p1=plot(Rr, R_median(1,:),'*g');
+        p1=plot(Rr, R_median(1,:),'*');
         p2=plot(Rr, R_median(2,:),'+r');
         
         hold on  
         Y1=beta_2 * Rr;
         Y2=beta_1 + (beta_2 + beta_3)*Rr;
-        p3=plot(Rr,Y1,'g');
-        p4=plot(Rr,Y2,'r');
+       % p3=plot(Rr,Y1,'g');
+       % p4=plot(Rr,Y2,'r');
         
-        legend1=[I{1,1}, ' ', I{1,4}{1}];
-        legend2=[I{1,1}, ' ', I{1,4}{2}];
-        legend([p3,p4], legend1, legend2);
+%         legend1=[I{1,1}, ' ', I{1,4}{1}];
+%         legend2=[I{1,1}, ' ', I{1,4}{2}];
+%         legend([p3,p4], legend1, legend2, 'Location','northwest');
         
 
         %subplot parameters
@@ -98,9 +99,9 @@ end
 
 hh=gcf;
 
-%set(hh,'PaperOrientation','portrait');
+set(hh,'PaperOrientation','landscape');
 
-%set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
+set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
-print(gcf, '-dpng', '../linear_regression_2.png');
+print(gcf, '-dpdf', '../linear_regression_simEIR_2017_2020_landscape.pdf');
 

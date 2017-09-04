@@ -187,7 +187,7 @@ for u=1:1:U_dim;
     %gives the name of the uth experiment 
     Experiment_name=[E_stored{indexa, indexb, indexc, 1}, sprintf('\n'), E_stored{indexa, indexb, indexc, 2}, ' ', '(median over ',num2str(Eind_dim),' scenarios)'];
     
-    plotfs = 5;
+    plotfs = 6.5;
     Title=title(Experiment_name, 'Interpreter', 'none');
     set(Title, 'FontSize', plotfs);
     

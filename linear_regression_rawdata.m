@@ -50,6 +50,8 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
         p2=plot(X(201:400,3), Y(201:400),'or');        
         
         
+        
+        
         hold on  
          
         repellent = [0 0.3 0.5 0.7];

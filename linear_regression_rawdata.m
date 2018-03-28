@@ -6,59 +6,57 @@ close
 for n=1:1:P1_dim; %number of values for first scenario parameter
     for p=1:1:P2_dim; %number of values for first scenario parameter
 
-        R_data=zeros(I1_dim,I2_dim,nseeds);
+        R_data=zeros(I1_dim,I2_dim,nseeds); %allocation to store data multidimensional
+        Y=[]; % allocation to store data in vector
         for k=1:1:I1_dim; % over values of first intervention parameter
             for l=1:1:I2_dim; % over values of first intervention parameter
             R_data(k,l,:)=R{n,p,k,l,4}; % data
+            Y =[Y; R{n,p,k,l,4}];
             end
         end
 
-        R_median=median(R_data,3);
-        %R_median=log(R_median./(1-R_median));
+        no = I1_dim * I2_dim *nseeds; % number of data points
+        
+        X=ones(no,4);
+        
+        X(1:no/2,2)=0;
+        X(no/2+1:end,2)=0.2;
+        
+        X(1:50,3)=0;
+        X(51:100,3)=0.3;
+        X(101:150,3)=0.5;
+        X(151:200,3)=0.7;
+        X(201:250,3)=0;
+        X(251:300,3)=0.3;
+        X(301:350,3)=0.5;
+        X(351:400,3)=0.7;
+        
+        X(:,4)=X(:,2).*X(:,3);
+        
+        
+        B = X\Y;
 
-        Rr=[0 0.3 0.5 0.7];
-
-        % linear regression
-        k=1;
-        X=ones(I2_dim,2);
-        X(:,2)=Rr;
-        Y=R_median(k,:)';
-        beta=X\Y;
-        beta_0=beta(1);
-        beta_2=beta(2);
-
-        k=2;
-        X=ones(I2_dim,2);
-        X(:,2)=Rr;
-        Y=R_median(k,:)';
-        beta=X\Y;
-        beta_3=beta(2)-beta_2;
-        beta_1=beta(1);
-
-        Beta(n,p,1)=beta_1;
-        Beta(n,p,2)=beta_2;
-        Beta(n,p,3)=beta_3;
+        Beta(n,p,1)=B(1);     %intercept    
+        Beta(n,p,2)=B(2);     %trap    
+        Beta(n,p,3)=B(3);     %repellent
+        Beta(n,p,4)=B(4);     %synergy i.e. trap*repellent
+        
         
         plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
         subplot(P1_dim,P2_dim,plotnr)
-%         p1=plot(Rr, exp(R_median(1,:))./(1+exp(R_median(1,:))),'*g');
-%         hold on
-%         p2=plot(Rr, exp(R_median(2,:))./(1+exp(R_median(2,:))),'+r');
 
-        p1=plot(Rr, R_median(1,:),'*g');
+        p1=plot(X(1:200,3), Y(1:200),'og');
         hold on
-        p2=plot(Rr, R_median(2,:),'+r');        
+        p2=plot(X(201:400,3), Y(201:400),'or');        
         
         
-         hold on  
-         %Y1=exp(beta_0 + beta_2 * Rr)./(1+exp(beta_0 + beta_2 * Rr));
-         %Y2=exp(beta_1 + (beta_2 + beta_3)*Rr)./(1+exp(beta_1 + (beta_2 + beta_3)*Rr));
+        hold on  
          
-         Y1=beta_0 + beta_2 * Rr;
-         Y2=beta_1 + (beta_2 + beta_3)*Rr;
-         p3=plot(Rr,Y1,'g');
-         hold on
-         p4=plot(Rr,Y2,'r');
+        repellent = [0 0.3 0.5 0.7];
+        p3 = plot(repellent, B(1) + B(3)*repellent,'g');
+        
+        hold on
+        p4 = plot(repellent, B(1) + 0.2 * B(2) + B(3)*repellent + B(4) * 0.2 * repellent,'r');
          
          %set(gca, 'YScale', 'log');
         
@@ -120,5 +118,5 @@ set(hh,'PaperOrientation','landscape');
 
 set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
-print(gcf, '-dpdf', 'C:\Users\denzad\Desktop\fourthtestafterawhile.pdf');
+print(gcf, '-dpdf', 'C:\Users\denzad\Desktop\test2.pdf');
 

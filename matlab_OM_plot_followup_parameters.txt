@@ -9,6 +9,11 @@ start=1140
 %Insert 0 if you want to analysis all the timesteps after start until the end
 finito=0
 
+%If you want to correct the values of one survey timestep each year then 
+%enter the correction for each timestep in the form 
+%SurveyTimestepCorrection=whichtimestep=correctionfactor
+SurveyTimestepCorrection=12=0.8571
+
 %Please insert for which experiments the dynamics over time should be plotted
 %Use the following format 
 %timeplot=n,p,colnr
@@ -16,7 +21,15 @@ finito=0
 %n is the number of the row of the experiment in the subplot,
 %p is the number of the column of the experiment in the subplot,
 %and colnr is the number of the box of the experiment in the boxplot.
-timeplot=1,1,1
+timeplot=2,1,1
+timeplot=2,1,4
+timeplot=2,1,5
+timeplot=2,1,8
+
+timeplot=2,3,1
+timeplot=2,3,4
+timeplot=2,3,5
+timeplot=2,3,8
 
 
 %Please insert plotmode=subplot if you want to plot the experiments into one subplot
@@ -40,14 +53,17 @@ yaxmax=0.18
 
 %If you want to set the labe of the y-Axis manually, enter the label here 
 %in the form "yaxis=your_label", else enter yaxis=0.
-yaxis=uncomp cases per person per month
+%yaxis=uncomp cases per person per month
+yaxis=0
 
 %If you want to scale the values manually, insert here the scaling factor 
 %in the form "scaling=your_value", else enter "scaling=1".
-scaling=1
+%note: scale by 6.369427 for age group 1 (under five)
+%note: scale by 1.18624 for age group 2 (over five)
+scaling=6.369427
 
 
 %in case of plotmode=subplot, Please insert name and path of the pdf 
 %in the format path/filename.pdf 
-saveas=../plots for nUncomp/R10_200_gamb_timeplot_nUncomp_pp_pa_2000_2035_new.pdf
+saveas=../../Rusinga_14/R14_timeplot_nUncomp_EIR200_pa_pp_2000_2035_under_five.pdf
 

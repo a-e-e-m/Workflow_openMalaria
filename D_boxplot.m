@@ -424,8 +424,10 @@ for run=1:1:2;
                 end
                 
             else    
-                %aligns the scaling of the Y-axis 
+                %aligns the scaling of the Y-axis if alignros==1
+                if alignrow==1
                 ha.YLim=[Yaxmin(n) Yaxmax(n)];
+                end
                 
                 %print to separate files
                 if subplotmode==0;

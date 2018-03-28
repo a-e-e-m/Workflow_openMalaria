@@ -159,7 +159,7 @@ startline=find(Atrash(:,1)==start, 1);
 
 %gives the number of the last line of the survey timestep finito
 finitoline=find(Atrash(:,1)==finito, 1, 'last');
-
+    
 %Find 'id', the measure matlab shall analyse
 id_found=find(strcmp(Para{1,1},'id'),1);
 id=str2double(Para{1, 2}{id_found});
@@ -183,6 +183,10 @@ year=str2double(Para{1, 2}{year_found});
 %finds a manually inserted label for the y-axis if there is one
 yaxis_found=find(strcmp(Para{1,1},'yaxis'));
 yaxis=Para{1,2}{yaxis_found};
+
+%finds whether scaling of y-axis is manually set
+alignrow_found=find(strcmp(Para{1,1},'alignrow'));
+alignrow=str2double(Para{1,2}{alignrow_found});
 
 %finds whether scaling of y-axis is manually set
 yaxmanual_found=find(strcmp(Para{1,1},'yaxmanual'));

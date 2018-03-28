@@ -1,26 +1,31 @@
 Beta=zeros(P1_dim,P2_dim,3);
 
+clf
+close
+
 for n=1:1:P1_dim;
     for p=1:1:P2_dim;
 
         R_data=zeros(I1_dim,I2_dim,nseeds);
-        for k=1:1:2;
+        for k=1:1:I1_dim;
             for l=1:1:I2_dim;
             R_data(k,l,:)=R{n,p,k,l,4};
             end
         end
 
         R_median=median(R_data,3);
-        R_median=log(R_median);
+        %R_median=log(R_median./(1-R_median));
 
         Rr=[0 0.3 0.5 0.7];
 
         % linear regression
         k=1;
-        X=Rr';
+        X=ones(I2_dim,2);
+        X(:,2)=Rr;
         Y=R_median(k,:)';
         beta=X\Y;
-        beta_2=beta;
+        beta_0=beta(1);
+        beta_2=beta(2);
 
         k=2;
         X=ones(I2_dim,2);
@@ -36,18 +41,30 @@ for n=1:1:P1_dim;
         
         plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
         subplot(P1_dim,P2_dim,plotnr)
-        p1=plot(Rr, R_median(1,:),'*');
-        p2=plot(Rr, R_median(2,:),'+r');
+%         p1=plot(Rr, exp(R_median(1,:))./(1+exp(R_median(1,:))),'*g');
+%         hold on
+%         p2=plot(Rr, exp(R_median(2,:))./(1+exp(R_median(2,:))),'+r');
+
+        p1=plot(Rr, R_median(1,:),'*g');
+        hold on
+        p2=plot(Rr, R_median(2,:),'+r');        
         
-        hold on  
-        Y1=beta_2 * Rr;
-        Y2=beta_1 + (beta_2 + beta_3)*Rr;
-       % p3=plot(Rr,Y1,'g');
-       % p4=plot(Rr,Y2,'r');
         
-%         legend1=[I{1,1}, ' ', I{1,4}{1}];
-%         legend2=[I{1,1}, ' ', I{1,4}{2}];
-%         legend([p3,p4], legend1, legend2, 'Location','northwest');
+         hold on  
+         %Y1=exp(beta_0 + beta_2 * Rr)./(1+exp(beta_0 + beta_2 * Rr));
+         %Y2=exp(beta_1 + (beta_2 + beta_3)*Rr)./(1+exp(beta_1 + (beta_2 + beta_3)*Rr));
+         
+         Y1=beta_0 + beta_2 * Rr;
+         Y2=beta_1 + (beta_2 + beta_3)*Rr;
+         p3=plot(Rr,Y1,'g');
+         hold on
+         p4=plot(Rr,Y2,'r');
+         
+         %set(gca, 'YScale', 'log');
+        
+         legend1=[I{1,1}, ' ', I{1,4}{1}];
+         legend2=[I{1,1}, ' ', I{1,4}{2}];
+         legend([p3,p4], legend1, legend2, 'Location','northeast');
         
 
         %subplot parameters
@@ -103,5 +120,5 @@ set(hh,'PaperOrientation','landscape');
 
 set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
-print(gcf, '-dpdf', '../linear_regression_simEIR_2017_2020_landscape.pdf');
+print(gcf, '-dpdf', '../../Rusinga_14/Rusinga_10/R14_nUncomp_pp_pa_2019_2020_EIR_50_200_linearreg_median.pdf');
 

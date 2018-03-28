@@ -18,7 +18,7 @@ clearvars -except E_stored path_output name id id_name person population ylabbel
 %loads the parameters from matlab_OM_plot_parameters.txt
 filepath='./matlab_OM_plot_followup_parameters.txt';
 fileID = fopen(filepath);
-Para_followup_plot = textscan(fileID, '%s %s', 'Delimiter', '=');
+Para_followup_plot = textscan(fileID, '%s %s %s', 'Delimiter', '=');
 fclose(fileID);
 dim=numel(Para_followup_plot{1,1});
 
@@ -46,7 +46,14 @@ startline=find(Atrash(:,1)==start, 1);
 %gives the number of the last line of the survey timestep finito
 finitoline=find(Atrash(:,1)==finito, 1, 'last');
 
-
+%Find 'SurveyTimestepCorrection', which gives the survey time step whos 
+%values have to be corrected and the respective correction factor
+SurveyTimestepCorrection_found=find(strcmp(Para_followup_plot{1,1},'SurveyTimestepCorrection'));
+SurveyTimestepCorrection=zeros(numel(SurveyTimestepCorrection_found),2);
+for i=1:1:numel(SurveyTimestepCorrection_found);
+    SurveyTimestepCorrection(i,1)=str2double(Para_followup_plot{1, 2}{SurveyTimestepCorrection_found(i)});
+    SurveyTimestepCorrection(i,2)=str2double(Para_followup_plot{1, 3}{SurveyTimestepCorrection_found(i)});
+end
 
 %finds the experiment indices of the experiment matlab shall plot
 U_found=find(strcmp(Para_followup_plot{1,1},'timeplot'));
@@ -164,7 +171,16 @@ for u=1:1:U_dim;
     if person==1
         A_measure_agesum_median(:,2)=A_measure_agesum_median(:,2)/population;
     end
-
+    
+    %Correction of the values of one survey timestep that is longer or short than
+    %the others
+    for j=1:1:(numel(SurveyTimestepCorrection)/2);
+    for i=1:1:(numel(A_measure_agesum_median)/2)
+        if mod(A_measure_agesum_median(i,1),12)==mod(SurveyTimestepCorrection(j,1),12)+1;
+            A_measure_agesum_median(i,2)=A_measure_agesum_median(i,2)*SurveyTimestepCorrection(j,2);
+        end
+    end
+    end
     
     X=1905+A_measure_agesum_median(:,1)/12;
     Y=scaling*A_measure_agesum_median(:,2);

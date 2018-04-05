@@ -1,7 +1,9 @@
-Beta=zeros(P1_dim,P2_dim,3);
+Beta_lm=zeros(P1_dim,P2_dim,4);
 
 clf
 close
+
+allmodelcoefficients = cell(P1_dim, P2_dim);
 
 for n=1:1:P1_dim; %number of values for first scenario parameter
     for p=1:1:P2_dim; %number of values for second scenario parameter
@@ -17,24 +19,53 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
 
         no = I1_dim * I2_dim *nseeds; % number of data points
         
-        X=ones(no,4);
+        trap=zeros(no,1);
+        trap(1:no/2,1)=0;
+        trap(no/2+1:no,1)=0.2;
         
-        X(1:no/2,2)=0;
-        X(no/2+1:end,2)=0.2;
+        repellent=zeros(no,1);
+        repellent(1:50,1)=0;
+        repellent(51:100,1)=0.3;
+        repellent(101:150,1)=0.5;
+        repellent(151:200,1)=0.7;
+        repellent(201:250,1)=0;
+        repellent(251:300,1)=0.3;
+        repellent(301:350,1)=0.5;
+        repellent(351:400,1)=0.7;
         
-        X(1:50,3)=0;
-        X(51:100,3)=0.3;
-        X(101:150,3)=0.5;
-        X(151:200,3)=0.7;
-        X(201:250,3)=0;
-        X(251:300,3)=0.3;
-        X(301:350,3)=0.5;
-        X(351:400,3)=0.7;
+     tbl = table(trap,repellent,Y,'VariableNames',{'trap','repellent','Y'});  
+     
+     lm = fitlm(tbl,'Y ~ trap + repellent + trap:repellent');
+     
+     allmodelcoefficients{n,p} = lm.Coefficients;
+    
+     Beta_lm(n,p,:) = lm.Coefficients.Estimate;
+     
+    plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
+    subplot(P1_dim,P2_dim,plotnr);
+    plot(lm);
+     
+    end
+end 
         
-        X(:,4)=X(:,2).*X(:,3);
-        
-        
-        B = X\Y;
+%         X=ones(no,4);
+%         
+%         X(1:no/2,2)=0;
+%         X(no/2+1:end,2)=0.2;
+%         
+%         X(1:50,3)=0;
+%         X(51:100,3)=0.3;
+%         X(101:150,3)=0.5;
+%         X(151:200,3)=0.7;
+%         X(201:250,3)=0;
+%         X(251:300,3)=0.3;
+%         X(301:350,3)=0.5;
+%         X(351:400,3)=0.7;
+%         
+%         X(:,4)=X(:,2).*X(:,3);
+%         
+%         
+%         B = X\Y;
 
         Beta(n,p,1)=B(1);     %intercept    
         Beta(n,p,2)=B(2);     %trap    
@@ -48,9 +79,7 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
         p1=plot(X(1:200,3), Y(1:200),'og');
         hold on
         p2=plot(X(201:400,3), Y(201:400),'or');        
-        
-        
-        
+             
         
         hold on  
          

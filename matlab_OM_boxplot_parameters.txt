@@ -1,7 +1,7 @@
 %for A_load_scenarios
 
 %Please insert 'path' to the scenarios.csv file
-pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data_and_matlabworkflow\Rusinga_15
+pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_15
 
 
 %Please insert the scenario parameters with its values and labels 
@@ -33,7 +33,7 @@ P=shares_species=dom. species=fune=fune
 
 I=traps=T=reference=0
 I=traps=T=0_2=0.2
-%I=traps=T=0_4=0.4
+I=traps=T=0_4=0.4
 
 I=repellent=R=reference=0
 I=repellent=R=0_3=0.3
@@ -65,7 +65,7 @@ base=repellent_deterrency=deterrency=0_7=0.7
 %for B_load_output
 
 %Please insert 'path' to the output files
-path_output=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data_and_matlabworkflow\Rusinga_15\outputs
+path_output=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_15\outputs
 
 %Please insert 'name' of the experiment
 name=Rusingafifteen
@@ -101,7 +101,7 @@ population=10000
 %Please indicate whether you want to measure per year i.e to average over 
 %the time between start and finito
 %type year=0 for no and year=1 for yes
-year=1
+year=0
 
 %If you want to set the labe of the y-Axis manually, enter the label here 
 %in the form "yaxis=your_label", else enter yaxis=0.
@@ -113,7 +113,7 @@ alignrow=1
 
 %If you want to set the scaling of the y-axis manually, insert
 %"yaxmanual=1", else insert "yaxmanual=0".
-yaxmanual=1
+yaxmanual=0
 
 %If yaxmanual=1, insert here the minimal and maximal value of the y-axis
 %in the form "yaxmin=yourvalue" and "yaxmax=yourvalue" on two separate lines.
@@ -167,4 +167,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=C:\Users\denzad\Desktop\thirdtestafterawhile.pdf
+filename=%C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_nUncomp_preintervEIR100and200_2019_2020_propofcasesaverted_allages

@@ -4,16 +4,16 @@ clf
 close
 
 for n=1:1:P1_dim; %number of values for first scenario parameter
-    for p=1:1:P2_dim; %number of values for first scenario parameter
+    for p=1:1:P2_dim; %number of values for second scenario parameter
 
         R_data=zeros(I1_dim,I2_dim,nseeds);
         for k=1:1:I1_dim; % over values of first intervention parameter
-            for l=1:1:I2_dim; % over values of first intervention parameter
+            for l=1:1:I2_dim; % over values of second intervention parameter
             R_data(k,l,:)=R{n,p,k,l,4}; % data
             end
         end
 
-        R_median=median(R_data,3);
+        R_median=mean(R_data,3);
         %R_median=log(R_median./(1-R_median));
 
         Rr=[0 0.3 0.5 0.7];
@@ -120,5 +120,5 @@ set(hh,'PaperOrientation','landscape');
 
 set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
-print(gcf, '-dpdf', 'C:\Users\denzad\Desktop\fourthtestafterawhile.pdf');
+print(gcf, '-dpdf', 'C:\Users\denzad\Desktop\test3_mean.pdf');
 

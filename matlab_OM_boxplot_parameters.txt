@@ -16,6 +16,7 @@ pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Mo
 %single value.
 %The order of the values given here will be preserved.
 
+P=scaled_annual_EIR=total EIR p.a.=50=50
 P=scaled_annual_EIR=total EIR p.a.=100=100
 P=scaled_annual_EIR=total EIR p.a.=200=200
 
@@ -31,14 +32,14 @@ P=shares_species=dom. species=fune=fune
 %they cannot have more than one value. 
 %The order of the values given here will be preserved.
 
-I=traps=T=reference=0
-I=traps=T=0_2=0.2
-I=traps=T=0_4=0.4
-
 I=repellent=R=reference=0
 I=repellent=R=0_3=0.3
 I=repellent=R=0_5=0.5
 I=repellent=R=0_7=0.7
+
+I=traps=T=reference=0
+I=traps=T=0_2=0.2
+I=traps=T=0_4=0.4
 
 I=trap_avail=trap_avail=reference=arab 0.3, gamb 0.7, fune 1
 
@@ -91,17 +92,17 @@ finito=1380
 %Please insert the id of the output measure you want to look at
 %in the form id=number=name
 %the name will be the label of the y-axis together with the specs below
-id=14=uncomp cases
+id=36=simEIR
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
-person=1
+person=0
 population=10000
 
 %Please indicate whether you want to measure per year i.e to average over 
 %the time between start and finito
 %type year=0 for no and year=1 for yes
-year=0
+year=1
 
 %If you want to set the labe of the y-Axis manually, enter the label here 
 %in the form "yaxis=your_label", else enter yaxis=0.
@@ -127,7 +128,7 @@ yaxmax=1.8
 %%takes the sum over the monthly values and divides by the number of years.
 %note: scale by 6.369427 for age group 1 (under five)
 %note: scale by 1.18624 for age group 2 (over five)
-scaling=1
+scaling=6.0833
 
 %Please insert subplotmode=1 if you want to put all plots into one subplot
 %and insert subplotmode=0 if you want to save the plots as separate plots 
@@ -167,4 +168,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=%C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_nUncomp_preintervEIR100and200_2019_2020_propofcasesaverted_allages
+filename=%C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_simEIR_preintervEIR50and100and200_2019_2020_allages

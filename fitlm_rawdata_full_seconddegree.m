@@ -34,15 +34,19 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
         repellent(401:600,1)=repellent(1:200,1);
 
         %log transform
-       % Y = log(Y);
+        Y = log(Y);
+     
+        %trap = log(trap+exp(-1))+1;
         
      tbl = table(trap,repellent,Y,'VariableNames',{'trap','repellent','Y'});  
      
-     lm = fitglm(tbl,'Y ~ trap  + repellent + trap:repellent', 'Distribution', 'normal');
+     %lm = fitlm(tbl,'Y ~ trap  + repellent  + trap:repellent');
+     
+     lm = fitlm(tbl,'Y ~ trap + trap^2 + repellent + repellent^2 + trap:repellent');
      
      allmodelcoefficients{n,p} = lm.Coefficients;
     
-     Beta_lm(n,p,1:numel(lm.Coefficients.Estimate)) = lm.Coefficients.Estimate;
+     Beta_lm(n,p,:) = lm.Coefficients.Estimate;
      
     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
     
@@ -50,36 +54,36 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
     subplot(P1_dim,P2_dim,plotnr);
     %plot(lm);
     
-%      p1=semilogy(repellent(1:200,1), exp(Y(1:200)),'og');
-%      hold on
-%      p2=semilogy(repellent(201:400,1), exp(Y(201:400)),'or');
-%      hold on
-%      p3=semilogy(repellent(401:600,1), exp(Y(401:600)),'om');
-%     
-%      hold on  
-%          
-%      repellent = [0 0.3 0.5 0.7];
-%      p4 = semilogy(repellent, exp(Beta_lm(n,p,1) + 0   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * 0   * repellent),'g');
-%      hold on
-%      p5 = semilogy(repellent, exp(Beta_lm(n,p,1) + 0.2 * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * 0.2 * repellent),'r');
-%      hold on
-%      p6 = semilogy(repellent, exp(Beta_lm(n,p,1) + 0.4 * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * 0.4 * repellent),'m');
-     
-    
-     p1=plot(repellent(1:200,1), Y(1:200),'og');
+     p1=semilogy(repellent(1:200,1), exp(Y(1:200)),'og');
      hold on
-     p2=plot(repellent(201:400,1), Y(201:400),'or');
+     p2=semilogy(repellent(201:400,1), exp(Y(201:400)),'or');
      hold on
-     p3=plot(repellent(401:600,1), Y(401:600),'om');
+     p3=semilogy(repellent(401:600,1), exp(Y(401:600)),'om');
     
      hold on  
          
      repellent = [0 0.3 0.5 0.7];
-     p4 = plot(repellent, Beta_lm(n,p,1) + trap(1)   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(1)   * repellent + trap(1)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6),'g');
+     p4 = semilogy(repellent, exp(Beta_lm(n,p,1) + trap(1)   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(1)   * repellent + trap(1)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6)),'g');
      hold on
-     p5 = plot(repellent, Beta_lm(n,p,1) + trap(201) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(201) * repellent + trap(201)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6),'r');
+     p5 = semilogy(repellent, exp(Beta_lm(n,p,1) + trap(201) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(201) * repellent + trap(201)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6)),'r');
      hold on
-     p6 = plot(repellent, Beta_lm(n,p,1) + trap(401) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(401) * repellent + trap(401)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6),'m');
+     p6 = semilogy(repellent, exp(Beta_lm(n,p,1) + trap(401) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(401) * repellent + trap(401)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6)),'m');
+     
+    
+%      p1=plot(repellent(1:200,1), Y(1:200),'og');
+%      hold on
+%      p2=plot(repellent(201:400,1), Y(201:400),'or');
+%      hold on
+%      p3=plot(repellent(401:600,1), Y(401:600),'om');
+%     
+%      hold on  
+%          
+%      repellent = [0 0.3 0.5 0.7];
+%      p4 = plot(repellent, Beta_lm(n,p,1) + trap(1)   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(1)   * repellent,'g');
+%      hold on
+%      p5 = plot(repellent, Beta_lm(n,p,1) + trap(201) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(201) * repellent,'r');
+%      hold on
+%      p6 = plot(repellent, Beta_lm(n,p,1) + trap(401) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(401) * repellent,'m');
      
          
      
@@ -142,7 +146,7 @@ set(hh,'PaperOrientation','landscape');
 
 set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
-%print(figure(1), '-dpdf', 'C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_simEIR_preintervEIR100and200_2019_2020_allages_linearregression_trap2.pdf');
+print(figure(1), '-dpdf', 'C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_simEIR_preintervEIR100and100_2019_2020_allages_linearregression_seconddegree.pdf');
      
      
      

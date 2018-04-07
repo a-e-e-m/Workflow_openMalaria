@@ -5,8 +5,8 @@ close
 
 allmodelcoefficients = cell(P1_dim, P2_dim);
 
-for n=2;%1:1:P1_dim; %number of values for first scenario parameter
-    for p=1;1:1:P2_dim; %number of values for second scenario parameter
+for n=1:1:P1_dim; %number of values for first scenario parameter
+    for p=1:1:P2_dim; %number of values for second scenario parameter
 
         R_data=zeros(I1_dim,I2_dim,nseeds); %allocation to store data multidimensional
         Y=[]; % allocation to store data in vector
@@ -47,18 +47,18 @@ for n=2;%1:1:P1_dim; %number of values for first scenario parameter
     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
     
 
-    %subplot(P1_dim,P2_dim,plotnr);
+    subplot(P1_dim,P2_dim,plotnr);
 
-   plot3(trap, repellent, Y, 'o');    
+    plot3(trap, repellent, Y, 'o');    
+    
+    hold on
    
-   hold on
-   
-   tra=[0 0.2 0.4];
-   rep=[0 0.3 0.5 0.7];
+   tra=0:0.05:0.4;
+   rep=0:0.05: 0.7;
    [Tra,Rep]=meshgrid(tra,rep);
    z= lm.Coefficients.Estimate(1) + lm.Coefficients.Estimate(2)*Tra + lm.Coefficients.Estimate(3)*Rep + lm.Coefficients.Estimate(4)*Tra.*Rep;
-   surf(tra,rep, z);     
-     
+   surf(tra,rep, z, 'LineStyle', 'none');     
+    
 
         
 
@@ -115,7 +115,7 @@ set(hh,'PaperOrientation','landscape');
 
 set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
 
-%print(figure(1), '-dpdf', 'C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_nUncomp_logtransform_logscale_preintervEIR20and50_2019_2020_perpers_allages_poissonregression.pdf');
+print(figure(1), '-dpdf', 'C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_nUncomp_preintervEIR100and200_2019_2020_perpers_allages_surf.pdf');
      
      
      

@@ -1,5 +1,7 @@
 2   insert switch to either show base experiment or not
 
+make the workflow save the txt file under filename.txt
+
 1  add bottom 5% and top 5% to timeplot
 ok if after TAG
 

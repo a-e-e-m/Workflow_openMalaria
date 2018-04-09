@@ -2,6 +2,8 @@
 
 make the workflow save the txt file under filename.txt
 
+comment and unify then maybe generalise fitlm and fitglm files
+
 1  add bottom 5% and top 5% to timeplot
 ok if after TAG
 

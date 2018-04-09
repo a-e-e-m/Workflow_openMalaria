@@ -32,14 +32,15 @@ P=shares_species=dom. species=fune=fune
 %they cannot have more than one value. 
 %The order of the values given here will be preserved.
 
+I=traps=T=reference=0
+%I=traps=T=0_2=0.2
+%I=traps=T=0_4=0.4
+
 I=repellent=R=reference=0
 I=repellent=R=0_3=0.3
 I=repellent=R=0_5=0.5
 I=repellent=R=0_7=0.7
 
-I=traps=T=reference=0
-I=traps=T=0_2=0.2
-I=traps=T=0_4=0.4
 
 I=trap_avail=trap_avail=reference=arab 0.3, gamb 0.7, fune 1
 
@@ -92,11 +93,11 @@ finito=1380
 %Please insert the id of the output measure you want to look at
 %in the form id=number=name
 %the name will be the label of the y-axis together with the specs below
-id=36=simEIR
+id=14=nUncomp
 
 %Please indicate whether you want to measure per person 
 %type 0 for no and 1 for yes and in this case give the population size
-person=0
+person=1
 population=10000
 
 %Please indicate whether you want to measure per year i.e to average over 
@@ -110,7 +111,7 @@ yaxis=0
 
 %Please insert alingrow=1 if you want to aling the y-axis in each row 
 %else, insert alingrow=0
-alignrow=1
+alignrow=0
 
 %If you want to set the scaling of the y-axis manually, insert
 %"yaxmanual=1", else insert "yaxmanual=0".
@@ -135,7 +136,7 @@ scaling=6.0833
 %note that, if subplotmode=0, then the specifications below apply as well and 
 %the name of one plot will be composed of the filename given below and the 
 %name of the setting as printed in the title of the plot
-subplotmode=1
+subplotmode=0
 
 %Please insert showtitle=0 if you dont want to print titles,
 %else insert showtitle=1
@@ -147,19 +148,19 @@ shorttitle=1
 
 %Please insert the font size of the labels in the plots in the form
 %plotfs=yoursize
-plotfs=10
+plotfs=24
 
 %Please insert the font size of the title of the plots in the form
 %titlefs=yoursize
-titlefs=11
+titlefs=28
 
 %Please insert the angle about which the labels in the plots shall be rotated 
 %in the form labelrotation=yourangle where yourangle is measured in degrees 
-labelrotation=45
+labelrotation=0
 
 %please insert the format you want to save the figure in, in the form
 %fileformat=yourformat
-fileformat=pdf
+fileformat=tiff
 
 %if fileformat=pdf
 %please insert the paper orientation you want to save the figure in, in the form
@@ -168,4 +169,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=%C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15\Rusinga15_simEIR_preintervEIR50and100and200_2019_2020_allages
+filename=%C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15_nUncomp_forpresentation\repellents

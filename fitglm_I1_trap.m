@@ -34,11 +34,8 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
         repellent(201:400,1)=repellent(1:200,1);
         repellent(401:600,1)=repellent(1:200,1);
         
-        
-        
-
         %log transform
-       % Y = log(Y);
+        %Y = log(Y);
         
      tbl = table(trap,repellent,Y,'VariableNames',{'trap','repellent','Y'});  
      
@@ -68,29 +65,79 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
 %      p5 = semilogy(repellent, exp(Beta_lm(n,p,1) + 0.2 * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * 0.2 * repellent),'r');
 %      hold on
 %      p6 = semilogy(repellent, exp(Beta_lm(n,p,1) + 0.4 * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * 0.4 * repellent),'m');
-     
     
-     p1=plot(repellent(1:200,1), Y(1:200),'og');
+     %Y=exp(Y);
+    
+     plot(repellent(1:200,1), Y(1:200),'og');
      hold on
-     p2=plot(repellent(201:400,1), Y(201:400),'or');
+     plot(repellent(201:400,1), Y(201:400),'or');
      hold on
-     p3=plot(repellent(401:600,1), Y(401:600),'om');
+     plot(repellent(401:600,1), Y(401:600),'om');
+
+     
+%      plot(trap(1:150,1), Y(1:150),'og');
+%      hold on
+%      plot(trap(151:300,1), Y(151:300),'or');
+%      hold on
+%      plot(trap(301:450,1), Y(301:450),'om');
+%      hold on
+%      plot(trap(451:600,1), Y(451:600),'ob');
     
      hold on  
          
-     repellent = [0 0.3 0.5 0.7];
-     p4 = plot(repellent, Beta_lm(n,p,1) + trap(1)   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(1)   * repellent + trap(1)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6),'g');
+%repellent = [0 0.3 0.5 0.7];
+%       plot(repellent, Beta_lm(n,p,1) + trap(1)   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + ...
+%          Beta_lm(n,p,4) * trap(1)   * repellent + trap(1)^2 *Beta_lm(n,p,5) + ...
+%          repellent.^2 * Beta_lm(n,p,6),'g');
+%      hold on
+%      plot(repellent, Beta_lm(n,p,1) + trap(201) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + ...
+%          Beta_lm(n,p,4) * trap(201) * repellent + trap(201)^2 *Beta_lm(n,p,5) + ...
+%          repellent.^2 * Beta_lm(n,p,6),'r');
+%      hold on
+%      plot(repellent, Beta_lm(n,p,1) + trap(401) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + ...
+%          Beta_lm(n,p,4) * trap(401) * repellent + trap(401)^2 *Beta_lm(n,p,5) + ...
+%          repellent.^2 * Beta_lm(n,p,6),'m');
+%      hold on
+%      plot(repellent, Beta_lm(n,p,1) + trap(401) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + ...
+%          Beta_lm(n,p,4) * trap(401) * repellent + trap(401)^2 *Beta_lm(n,p,5) + ...
+%          repellent.^2 * Beta_lm(n,p,6),'m'); 
+
+
+     repellenti=[0 0.3 0.5 0.7];
+     p1=plot(repellenti, Beta_lm(n,p,1) + trap(1)   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellenti + ...
+         Beta_lm(n,p,4) * trap(1)   * repellenti + trap(1)^2 *Beta_lm(n,p,5) + ...
+         repellenti.^2 * Beta_lm(n,p,6),'g');
      hold on
-     p5 = plot(repellent, Beta_lm(n,p,1) + trap(201) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(201) * repellent + trap(201)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6),'r');
+     p2=plot(repellenti, Beta_lm(n,p,1) + trap(201) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellenti + ...
+         Beta_lm(n,p,4) * trap(201) * repellenti + trap(201)^2 *Beta_lm(n,p,5) + ...
+         repellenti.^2 * Beta_lm(n,p,6),'r');
      hold on
-     p6 = plot(repellent, Beta_lm(n,p,1) + trap(401) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellent + Beta_lm(n,p,4) * trap(401) * repellent + trap(401)^2 *Beta_lm(n,p,5) + repellent.^2 * Beta_lm(n,p,6),'m');
+     p3=plot(repellenti, Beta_lm(n,p,1) + trap(401) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*repellenti + ...
+         Beta_lm(n,p,4) * trap(401) * repellenti + trap(401)^2 *Beta_lm(n,p,5) + ...
+         repellenti.^2 * Beta_lm(n,p,6),'m');
+
      
-         
+     
+%      p1=plot(trapi, Beta_lm(n,p,1) + repellent(1)   * Beta_lm(n,p,2) + Beta_lm(n,p,3)*trapi + ...
+%          Beta_lm(n,p,4) * repellent(1)   * trapi + repellent(1)^2 *Beta_lm(n,p,5) + ...
+%          trapi.^2 * Beta_lm(n,p,6),'g');
+%      hold on
+%      p2=plot(trapi, Beta_lm(n,p,1) + repellent(151) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*trapi + ...
+%          Beta_lm(n,p,4) * repellent(151) * trapi + repellent(151)^2 *Beta_lm(n,p,5) + ...
+%          trapi.^2 * Beta_lm(n,p,6),'r');
+%      hold on
+%      p3=plot(trapi, Beta_lm(n,p,1) + repellent(301) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*trapi + ...
+%          Beta_lm(n,p,4) * repellent(301) * trapi + repellent(301)^2 *Beta_lm(n,p,5) + ...
+%          trapi.^2 * Beta_lm(n,p,6),'m');
+%      hold on
+%      p4=plot(trapi, Beta_lm(n,p,1) + repellent(451) * Beta_lm(n,p,2) + Beta_lm(n,p,3)*trapi + ...
+%          Beta_lm(n,p,4) * repellent(451) * trapi + repellent(451)^2 *Beta_lm(n,p,5) + ...
+%          trapi.^2 * Beta_lm(n,p,6),'b');  
      
          legend1=[I{1,1}, ' ', I{1,4}{1}];
          legend2=[I{1,1}, ' ', I{1,4}{2}];
          legend3=[I{1,1}, ' ', I{1,4}{3}];
-         legend([p4,p5,p6], legend1, legend2, legend3, 'Location','northeast');
+         legend([p1,p2,p3], legend1, legend2, legend3,'Location','northeast');
         
 
         %subplot parameters
@@ -143,7 +190,7 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
 
           %  set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
                
-            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'glm_plot'];
+            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'glm_1stdegree_plot'];
             plotnamewithextension=[plotname '.tiff'];
             print(gcf, '-dtiff', plotnamewithextension); 
             
@@ -168,7 +215,7 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
                 'FontName',FixedWidth,'Units','Normalized','Position',[0 0 1 1]);
 
             
-            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'glm_coeff'];
+            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'glm_1stdegree_coeff'];
             plotnamewithextension=[plotname '.tiff'];
             print(gcf, '-dtiff', plotnamewithextension); 
     end 

@@ -21,7 +21,7 @@ E_stored=cell(P1_dim, P2_dim, I1_dim*I2_dim, 3);
 
 %prepare a cell array to store data behind the boxplot 
 %for every situation (n,p) and every experiment (k, l) the 
-%the following data is stored: str1, str2, colnr, datapoints
+%the following data is stored: colnr, str1, str2, datapoints
 R=cell(P1_dim, P2_dim, I1_dim, I2_dim,4);
 
 
@@ -334,7 +334,8 @@ for run=1:1:2;
                     X(:,colnr)=A_measure_agesum_sum;
                     Label{colnr}=strcurrent;
                     
-                    %store raw data in R
+                    %store raw data in R if run=1
+                    if run==1
                     R{n,p,k,l,1}=colnr;
                     R{n,p,k,l,2}=str1;
                     R{n,p,k,l,3}=str2;
@@ -344,7 +345,7 @@ for run=1:1:2;
                         if compare==1 || proportion==1;
                            R{n,p,kstar,lstar,4}=zeros(nseeds,1);
                         end
-                    
+                    end
                     
                 end
             end 

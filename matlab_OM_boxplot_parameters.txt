@@ -38,7 +38,7 @@ I=traps=T=0_2=0.2
 
 I=repellent=R=reference=0
 I=repellent=R=0_3=0.3
-I=repellent=R=0_5=0.5
+%I=repellent=R=0_5=0.5
 %I=repellent=R=0_7=0.7
 
 
@@ -148,11 +148,11 @@ shorttitle=1
 
 %Please insert the font size of the labels in the plots in the form
 %plotfs=yoursize
-plotfs=24
+plotfs=10
 
 %Please insert the font size of the title of the plots in the form
 %titlefs=yoursize
-titlefs=28
+titlefs=11
 
 %Please insert the angle about which the labels in the plots shall be rotated 
 %in the form labelrotation=yourangle where yourangle is measured in degrees 

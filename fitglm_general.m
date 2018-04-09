@@ -6,7 +6,6 @@
 clf
 close
 
-
 Beta=zeros(P1_dim,P2_dim,6); %allocation to store model coefficients
 
 no = I1_dim * I2_dim *nseeds; %number of data points
@@ -47,11 +46,14 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
      
      %store coefficients of model
      Beta(n,p,1:numel(lm.Coefficients.Estimate)) = lm.Coefficients.Estimate;
+
      
-%     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
-%     subplot(P1_dim,P2_dim,plotnr);
-   
-    
+if subplotmode==1     
+     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
+     subplot(P1_dim,P2_dim,plotnr);
+end   
+
+figure(1)
   
 if strcmp(scale,'log')==1;
     plotti=@semilogy;
@@ -149,21 +151,26 @@ end
             ha.XTickLabelRotation = 0;
                   
            
+if subplotmode==0            
             hh=gcf;
-
-          %  set(hh,'PaperOrientation','landscape');
-
-          %  set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
-               
+            set(hh,'PaperOrientation','landscape');
+            set(hh,'PaperPosition', [0 0 9 7]);        
+    
             plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'test_plot'];
             plotnamewithextension=[plotname '.tiff'];
             print(gcf, '-dtiff', plotnamewithextension);
-            %print(gcf, '-dtiff', 'test_plot.tiff');
             
             close gcf
+end            
+
             
          
-            
+%figure for model information
+if subplotmode==1 
+     figure(2)
+     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
+     subplot(P1_dim,P2_dim,plotnr);
+end  
             
             % Get the table in string form.
             TString = evalc('disp(lm)');
@@ -180,21 +187,49 @@ end
             annotation(gcf,'Textbox','String',TString,'Interpreter','Tex',...
                 'FontName',FixedWidth,'Units','Normalized','Position',[0 0 1 1]);
 
-            
+if subplotmode==0  
+            hh=gcf;
+            set(hh,'PaperOrientation','portrait');
+            set(hh,'PaperPosition', [0 0 20 15]);
+    
             plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'test_coeff'];
             plotnamewithextension=[plotname '.tiff'];
             print(gcf, '-dtiff', plotnamewithextension); 
-            %print(gcf, '-dtiff', 'test_coeff.tiff');
             
             close gcf
-    end 
 end
 
 
 
 
+    end 
+end
+
+
+
+if subplotmode==1
+      figure(1)
+            hh=gcf;
+
+            set(hh,'PaperOrientation','landscape');
+
+            set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
+     
+            plotname=[filename '_' 'test_plot'];
+            plotnamewithextension=[plotname '.pdf'];
+            print(gcf, '-dpdf', plotnamewithextension);
+            
+      figure(2)
+            hh=gcf;
+
+            set(hh,'PaperOrientation','landscape');
+
+            set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
+     
+            plotname=[filename '_' 'test_coef'];
+            plotnamewithextension=[plotname '.pdf'];
+            print(gcf, '-dpdf', plotnamewithextension);       
      
      
-     
-     
+end  
 

@@ -18,11 +18,11 @@ pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Mo
 
 P=scaled_annual_EIR=total EIR p.a.=50=50
 P=scaled_annual_EIR=total EIR p.a.=100=100
-P=scaled_annual_EIR=total EIR p.a.=200=200
+%P=scaled_annual_EIR=total EIR p.a.=200=200
 
 P=shares_species=dom. species=arab=arab
 P=shares_species=dom. species=gamb=gamb
-P=shares_species=dom. species=fune=fune
+%P=shares_species=dom. species=fune=fune
 
 %Please insert the intervention parameters with its values and labels 
 %in the form I=parameter=parameterlabel=value=valuelabel
@@ -33,13 +33,13 @@ P=shares_species=dom. species=fune=fune
 %The order of the values given here will be preserved.
 
 I=traps=T=reference=0
-%I=traps=T=0_2=0.2
+I=traps=T=0_2=0.2
 %I=traps=T=0_4=0.4
 
 I=repellent=R=reference=0
 I=repellent=R=0_3=0.3
 I=repellent=R=0_5=0.5
-I=repellent=R=0_7=0.7
+%I=repellent=R=0_7=0.7
 
 
 I=trap_avail=trap_avail=reference=arab 0.3, gamb 0.7, fune 1
@@ -169,4 +169,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=%C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\Rusinga_15_nUncomp_forpresentation\repellents
+filename=C:\Users\denzad\Desktop\testdir\test

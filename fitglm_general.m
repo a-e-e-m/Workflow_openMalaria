@@ -6,7 +6,7 @@
 clf
 close
 
-modelname = 'lmsecondorder';
+modelname = 'glmfirstorder';
 
 Beta=zeros(P1_dim,P2_dim,6); %allocation to store model coefficients
 
@@ -43,7 +43,7 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
      
         Link = 'identity';
         scale = 'identity';
-        lm = fitglm(tbl,'Y ~ Interv2 + Interv2^2', ...
+        lm = fitglm(tbl,'Y ~ Interv1 + Interv2 + Interv1:Interv2 ', ...
             'Distribution', 'normal', 'Link', Link);
      
      %store coefficients of model
@@ -74,7 +74,7 @@ end
 
     
     
-    colour = colours{1, mod(i,6)};
+    colour = colours{1, mod(i-1,6)+1};
     sign = ['o', colour];
     legendName = [I{1,1}, ' ', I{1,4}{i}];
     
@@ -83,6 +83,9 @@ end
     
     %plot data points
     plotti( Interv2(groupstart:groupend), Y(groupstart:groupend), sign, 'DisplayName', legendName)
+    
+    ha=gca;
+    ha.YLim=[0 1.5];
     hold on
     
     %plot regression lines
@@ -96,17 +99,20 @@ end
         Interv2_values = [Interv2_values, str2num(I{2,4}{j})];
     end
     
+    curve = Beta(n,p,1) + ...
+            Beta(n,p,2) * Interv1_values(i) + ...
+            Beta(n,p,3) * Interv2_values + ...
+            Beta(n,p,4) * Interv1_values(i) * Interv2_values;% + ...
+            %Beta(n,p,5) * Interv1_values(i)^2 + ...
+            %Beta(n,p,6) * Interv2_values.^2;
+    
 %     curve = Beta(n,p,1) + ...
 %             Beta(n,p,2) * Interv1_values(i) + ...
 %             Beta(n,p,3) * Interv2_values + ...
-%             Beta(n,p,4) * Interv1_values(i) * Interv2_values + ...
-%             Beta(n,p,5) * Interv1_values(i)^2 + ...
-%             Beta(n,p,6) * Interv2_values.^2;
-    
-        curve = Beta(n,p,1) + ...
-            Beta(n,p,2) * Interv2_values + ...
-            Beta(n,p,3) * Interv2_values.^2;
+%             Beta(n,p,4) * Interv1_values(i) * Interv2_values+ ...
+%             Beta(n,p,5) * Interv2_values.^2;
         
+
         
     if strcmp(Link,'log')==1;
         curve = exp(curve);
@@ -115,11 +121,13 @@ end
     pipi=plotti(Interv2_values, curve, colour, 'DisplayName', legendName);
     hold on
     
+    ha=gca;
+    ha.YLim=[0 1.5];
    
     
 end
     hold off
-    legend('Location', 'best');
+    %legend('Location', 'best');
         
 
         %subplot parameters

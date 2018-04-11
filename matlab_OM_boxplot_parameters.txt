@@ -1,7 +1,7 @@
 %for A_load_scenarios
 
 %Please insert 'path' to the scenarios.csv file
-pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_15
+pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_17
 
 
 %Please insert the scenario parameters with its values and labels 
@@ -16,9 +16,10 @@ pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Mo
 %single value.
 %The order of the values given here will be preserved.
 
-P=scaled_annual_EIR=total EIR p.a.=50=50
-P=scaled_annual_EIR=total EIR p.a.=100=100
-P=scaled_annual_EIR=total EIR p.a.=200=200
+%P=scaled_annual_EIR=EIR before LLIN=20=20
+P=scaled_annual_EIR=EIR before LLIN=50=50
+P=scaled_annual_EIR=EIR before LLIN=100=100
+P=scaled_annual_EIR=EIR before LLIN=200=200
 
 P=shares_species=dom. species=arab=arab
 P=shares_species=dom. species=gamb=gamb
@@ -33,14 +34,19 @@ P=shares_species=dom. species=fune=fune
 %The order of the values given here will be preserved.
 
 I=repellent=R=reference=0
-%I=repellent=R=0_3=0.3
-%I=repellent=R=0_5=0.5
-%I=repellent=R=0_7=0.7
+I=repellent=R=0_2=0.2
+I=repellent=R=0_4=0.4
+I=repellent=R=0_6=0.6
+I=repellent=R=0_8=0.8
+%I=repellent=R=1=1
 
 I=traps=T=reference=0
+I=traps=T=0_1=0.1
 I=traps=T=0_2=0.2
+I=traps=T=0_3=0.3
 I=traps=T=0_4=0.4
-
+%I=traps=T=0_6=0.6
+%I=traps=T=0_8=0.8
 
 I=trap_avail=trap_avail=reference=arab 0.3, gamb 0.7, fune 1
 
@@ -67,10 +73,10 @@ base=repellent_deterrency=deterrency=0_7=0.7
 %for B_load_output
 
 %Please insert 'path' to the output files
-path_output=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_15\outputs
+path_output=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_17\outputs
 
 %Please insert 'name' of the experiment
-name=Rusingafifteen
+name=Rusingaseventeen
 
 %for C_extract_Aid_agesum
 
@@ -143,7 +149,7 @@ subplotmode=1
 showtitle=1 
 
 %If showtitle=1 and you want to print short titles, insert shorttitle=1,
-%else insert shorttitle=1
+%else insert shorttitle=0
 shorttitle=1
 
 %Please insert the font size of the labels in the plots in the form
@@ -156,7 +162,7 @@ titlefs=9
 
 %Please insert the angle about which the labels in the plots shall be rotated 
 %in the form labelrotation=yourangle where yourangle is measured in degrees 
-labelrotation=0
+labelrotation=45
 
 %please insert the format you want to save the figure in, in the form
 %fileformat=yourformat
@@ -169,4 +175,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\plots for MIM presentation\Rusinga_15\trap only\casesperpers_20172020_boxplot
+filename=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\plots for MIM presentation\Rusinga_17\push_pull\casesperpers_20172020_boxplot_repellentfirst_morerealistic

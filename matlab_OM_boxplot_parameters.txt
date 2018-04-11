@@ -18,11 +18,11 @@ pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Mo
 
 P=scaled_annual_EIR=total EIR p.a.=50=50
 P=scaled_annual_EIR=total EIR p.a.=100=100
-%P=scaled_annual_EIR=total EIR p.a.=200=200
+P=scaled_annual_EIR=total EIR p.a.=200=200
 
 P=shares_species=dom. species=arab=arab
 P=shares_species=dom. species=gamb=gamb
-%P=shares_species=dom. species=fune=fune
+P=shares_species=dom. species=fune=fune
 
 %Please insert the intervention parameters with its values and labels 
 %in the form I=parameter=parameterlabel=value=valuelabel
@@ -32,14 +32,14 @@ P=shares_species=dom. species=gamb=gamb
 %they cannot have more than one value. 
 %The order of the values given here will be preserved.
 
-I=traps=T=reference=0
-I=traps=T=0_2=0.2
-%I=traps=T=0_4=0.4
-
 I=repellent=R=reference=0
-I=repellent=R=0_3=0.3
+%I=repellent=R=0_3=0.3
 %I=repellent=R=0_5=0.5
 %I=repellent=R=0_7=0.7
+
+I=traps=T=reference=0
+I=traps=T=0_2=0.2
+I=traps=T=0_4=0.4
 
 
 I=trap_avail=trap_avail=reference=arab 0.3, gamb 0.7, fune 1
@@ -81,7 +81,7 @@ name=Rusingafifteen
 age=0
 
 %Please insert at what survey time step you want to start the analysis 
-start=1368
+start=1344
 %note: month 1344 is year 2017 ie start of push-pull
 %note: month 1368 is year 2019
 
@@ -105,9 +105,9 @@ population=10000
 %type year=0 for no and year=1 for yes
 year=1
 
-%If you want to set the labe of the y-Axis manually, enter the label here 
+%If you want to set the label of the y-Axis manually, enter the label here 
 %in the form "yaxis=your_label", else enter yaxis=0.
-yaxis=0
+yaxis=cases per person per year
 
 %Please insert alingrow=1 if you want to aling the y-axis in each row 
 %else, insert alingrow=0
@@ -115,12 +115,12 @@ alignrow=0
 
 %If you want to set the scaling of the y-axis manually, insert
 %"yaxmanual=1", else insert "yaxmanual=0".
-yaxmanual=0
+yaxmanual=1
 
 %If yaxmanual=1, insert here the minimal and maximal value of the y-axis
 %in the form "yaxmin=yourvalue" and "yaxmax=yourvalue" on two separate lines.
 yaxmin=0
-yaxmax=1.8
+yaxmax=1.5
 
 %If you want to scale the values manually, insert here the scaling factor 
 %in the form "scaling=your_value", else enter "scaling=1".
@@ -129,14 +129,14 @@ yaxmax=1.8
 %%takes the sum over the monthly values and divides by the number of years.
 %note: scale by 6.369427 for age group 1 (under five)
 %note: scale by 1.18624 for age group 2 (over five)
-scaling=6.0833
+scaling=1
 
 %Please insert subplotmode=1 if you want to put all plots into one subplot
 %and insert subplotmode=0 if you want to save the plots as separate plots 
 %note that, if subplotmode=0, then the specifications below apply as well and 
 %the name of one plot will be composed of the filename given below and the 
 %name of the setting as printed in the title of the plot
-subplotmode=0
+subplotmode=1
 
 %Please insert showtitle=0 if you dont want to print titles,
 %else insert showtitle=1
@@ -148,11 +148,11 @@ shorttitle=1
 
 %Please insert the font size of the labels in the plots in the form
 %plotfs=yoursize
-plotfs=10
+plotfs=8
 
 %Please insert the font size of the title of the plots in the form
 %titlefs=yoursize
-titlefs=11
+titlefs=9
 
 %Please insert the angle about which the labels in the plots shall be rotated 
 %in the form labelrotation=yourangle where yourangle is measured in degrees 
@@ -160,7 +160,7 @@ labelrotation=0
 
 %please insert the format you want to save the figure in, in the form
 %fileformat=yourformat
-fileformat=tiff
+fileformat=pdf
 
 %if fileformat=pdf
 %please insert the paper orientation you want to save the figure in, in the form
@@ -169,4 +169,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=C:\Users\denzad\Desktop\testdir\test
+filename=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\plots for MIM presentation\Rusinga_15\trap only\casesperpers_20172020_boxplot

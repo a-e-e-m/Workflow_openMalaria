@@ -6,6 +6,8 @@
 clf
 close
 
+modelname = 'lmsecondorder';
+
 Beta=zeros(P1_dim,P2_dim,6); %allocation to store model coefficients
 
 no = I1_dim * I2_dim *nseeds; %number of data points
@@ -39,22 +41,19 @@ for n=1:1:P1_dim; %number of values for first scenario parameter
         %store independent variables and output in table
         tbl = table(Interv1,Interv2,Y,'VariableNames',{'Interv1','Interv2','Y'});  
      
-        Link = 'log';
+        Link = 'identity';
         scale = 'identity';
-        lm = fitglm(tbl,'Y ~ Interv1^2  + Interv2^2 + Interv1:Interv2', ...
+        lm = fitglm(tbl,'Y ~ Interv2 + Interv2^2', ...
             'Distribution', 'normal', 'Link', Link);
      
      %store coefficients of model
      Beta(n,p,1:numel(lm.Coefficients.Estimate)) = lm.Coefficients.Estimate;
+   
 
-     
-if subplotmode==1     
-     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
-     subplot(P1_dim,P2_dim,plotnr);
-end   
-
+%creating figure for plot
 figure(1)
-  
+
+%used later for ploting
 if strcmp(scale,'log')==1;
     plotti=@semilogy;
 else 
@@ -63,16 +62,27 @@ end
 
 colours = {'m' 'c' 'r' 'g' 'b' 'y'};
 
+
 %for loop over groups i.e. over values of Intervention 1
 for i=1:I1_dim
+    
+    %if subplotmode==1 subplot is given here
+    if subplotmode==1
+       plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
+       subplot(P1_dim,P2_dim,plotnr);
+end
+
+    
+    
     colour = colours{1, mod(i,6)};
     sign = ['o', colour];
+    legendName = [I{1,1}, ' ', I{1,4}{i}];
     
     groupstart = 1+(i-1)*noI2; 
     groupend = i*noI2;
     
     %plot data points
-    plotti( Interv2(groupstart:groupend), Y(groupstart:groupend), sign)
+    plotti( Interv2(groupstart:groupend), Y(groupstart:groupend), sign, 'DisplayName', legendName)
     hold on
     
     %plot regression lines
@@ -86,25 +96,30 @@ for i=1:I1_dim
         Interv2_values = [Interv2_values, str2num(I{2,4}{j})];
     end
     
-    curve = Beta(n,p,1) + ...
-            Beta(n,p,2) * Interv1_values(i) + ...
-            Beta(n,p,3) * Interv2_values + ...
-            Beta(n,p,4) * Interv1_values(i) * Interv2_values + ...
-            Beta(n,p,5) * Interv1_values(i) + ...
-            Beta(n,p,6) * Interv2_values
+%     curve = Beta(n,p,1) + ...
+%             Beta(n,p,2) * Interv1_values(i) + ...
+%             Beta(n,p,3) * Interv2_values + ...
+%             Beta(n,p,4) * Interv1_values(i) * Interv2_values + ...
+%             Beta(n,p,5) * Interv1_values(i)^2 + ...
+%             Beta(n,p,6) * Interv2_values.^2;
     
+        curve = Beta(n,p,1) + ...
+            Beta(n,p,2) * Interv2_values + ...
+            Beta(n,p,3) * Interv2_values.^2;
+        
+        
     if strcmp(Link,'log')==1;
         curve = exp(curve);
     end
     
-    plotti(Interv2_values, curve, colour);
+    pipi=plotti(Interv2_values, curve, colour, 'DisplayName', legendName);
     hold on
     
-    %legendInfo{i} = [I{1,1}, ' ', I{1,4}{i}];
+   
     
 end
-    
-    %legend(legendInfo,'Location','best');
+    hold off
+    legend('Location', 'best');
         
 
         %subplot parameters
@@ -150,13 +165,13 @@ end
             set(ha, 'FontSize', plotfs); 
             ha.XTickLabelRotation = 0;
                   
-           
-if subplotmode==0            
+%print plot file if subplotmode==0
+if subplotmode==0
             hh=gcf;
             set(hh,'PaperOrientation','landscape');
             set(hh,'PaperPosition', [0 0 9 7]);        
     
-            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'test_plot'];
+            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} '_' modelname '_' 'plot'];
             plotnamewithextension=[plotname '.tiff'];
             print(gcf, '-dtiff', plotnamewithextension);
             
@@ -165,13 +180,8 @@ end
 
             
          
-%figure for model information
-if subplotmode==1 
-     figure(2)
-     plotnr=(n-1)*P2_dim+p; %gives the number of the plot corresponding to n,p
-     subplot(P1_dim,P2_dim,plotnr);
-end  
-            
+%figure for model information 
+figure(2)            
             % Get the table in string form.
             TString = evalc('disp(lm)');
 
@@ -187,17 +197,17 @@ end
             annotation(gcf,'Textbox','String',TString,'Interpreter','Tex',...
                 'FontName',FixedWidth,'Units','Normalized','Position',[0 0 1 1]);
 
-if subplotmode==0  
+%print figure with model information
             hh=gcf;
             set(hh,'PaperOrientation','portrait');
             set(hh,'PaperPosition', [0 0 20 15]);
     
-            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} 'test_coeff'];
+            plotname=[filename '__' P{1,2} P{1,4}{n} '_' P{2,2} P{2,4}{p} '_' modelname '_' 'info'];
             plotnamewithextension=[plotname '.tiff'];
             print(gcf, '-dtiff', plotnamewithextension); 
             
             close gcf
-end
+
 
 
 
@@ -205,31 +215,18 @@ end
     end 
 end
 
-
-
 if subplotmode==1
-      figure(1)
+            figure(1)
             hh=gcf;
 
             set(hh,'PaperOrientation','landscape');
 
             set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
-     
-            plotname=[filename '_' 'test_plot'];
+
+            plotname=[filename '_' modelname '_' 'subplots'];
             plotnamewithextension=[plotname '.pdf'];
             print(gcf, '-dpdf', plotnamewithextension);
-            
-      figure(2)
-            hh=gcf;
 
-            set(hh,'PaperOrientation','landscape');
+end
 
-            set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
-     
-            plotname=[filename '_' 'test_coef'];
-            plotnamewithextension=[plotname '.pdf'];
-            print(gcf, '-dpdf', plotnamewithextension);       
-     
-     
-end  
 

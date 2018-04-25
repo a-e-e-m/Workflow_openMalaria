@@ -6,7 +6,7 @@
 clf
 close
 
-modelname = 'glmfirstorder';
+modelname = 'glmfirstordersurf';
 
 Beta=zeros(P1_dim,P2_dim,6); %allocation to store model coefficients
 
@@ -81,10 +81,10 @@ for i=1:I1_dim
     groupend = i*noI2;
     
     %plot data points
-    plotti( Interv2(groupstart:groupend), Y(groupstart:groupend), sign, 'DisplayName', legendName)
+    plot3(Interv1(groupstart:groupend), Interv2(groupstart:groupend), Y(groupstart:groupend), sign)
     
     ha=gca;
-    ha.YLim=[0 1.5];
+    ha.ZLim=[0 1.5];
     hold on
     
     %plot regression lines
@@ -98,36 +98,32 @@ for i=1:I1_dim
         Interv2_values = [Interv2_values, str2num(I{2,4}{j})];
     end
     
-%     curve = Beta(n,p,1) + ...
-%             Beta(n,p,2) * Interv1_values(i) + ...
-%             Beta(n,p,3) * Interv2_values + ...
-%             Beta(n,p,4) * Interv1_values(i) * Interv2_values + ...
-%             Beta(n,p,5) * Interv1_values(i)^2 + ...
-%             Beta(n,p,6) * Interv2_values.^2;
-    
-    curve = Beta(n,p,1) + ...
-            Beta(n,p,2) * Interv1_values(i) + ...
-            Beta(n,p,3) * Interv2_values + ...
-            Beta(n,p,4) * Interv1_values(i) * Interv2_values ;
-           % Beta(n,p,5) * Interv1_values(i)^2;
+  Interv1cont=Interv1(1):0.05:Interv1(end);
+  Interv2cont=Interv2(1):0.05:Interv2(end);
+
+   [INTERV1CONT,INTERV2CONT]=meshgrid(Interv1cont,Interv2cont);
+   z = Beta(n,p,1) + ...
+            Beta(n,p,2) * INTERV1CONT + ...
+            Beta(n,p,3) * INTERV2CONT + ...
+            Beta(n,p,4) * INTERV1CONT .* INTERV2CONT ;
         
-% curve2 = Beta(n,p,1) + ...
-%             Beta(n,p,2) * Interv1_values(i) + ...
-%             Beta(n,p,3) * Interv2_values;
+   s=surf(INTERV1CONT,INTERV2CONT, z, 'LineStyle', 'none'); 
+%    hold on
+%    
+%       z2 = Beta(n,p,1) + ...
+%             Beta(n,p,2) * INTERV1CONT + ...
+%             Beta(n,p,3) * INTERV2CONT;
+%         
+% %    s=contour(INTERV1CONT,INTERV2CONT, z2, '--'); 
+   
+   
+  % s=xlabel('trap-human ratio', 'FontSize', 16);
+  % s=ylabel('repellent coverage', 'FontSize', 16); 
         
-    if strcmp(Link,'log')==1;
-        curve = exp(curve);
-    end
-    
-    pipi=plotti(Interv2_values, curve, colour, 'DisplayName', legendName);
-    hold on
-    
-%     sign2=[colour, '--'];
-%     pipo=plotti(Interv2_values, curve2, sign2, 'DisplayName', legendName);
-%     hold on
+
     
     ha=gca;
-    ha.YLim=[0 1.5];
+
    
     
 end
@@ -135,47 +131,7 @@ end
     %legend('Location', 'best');
         
 
-        %subplot parameters
-            %hx  = xlabel(I{2,1});
-            hx=xlabel('repellent coverage', 'FontSize', 12);
-            
-            ylabbel=id_name;
-            if person==1
-                ylabbel=[ylabbel, ' per person '];
-            end
-            if year==1
-                ylabbel=[ylabbel, 'per year '];
-            end
-            
-            if compare==1
-                ylabbel=[ylabbel, 'as difference to '];
-            end
-            
-            if compare==1 && proportion==1
-                ylabbel=[ylabbel, 'and '];
-            end
-            
-            if proportion==1
-                ylabbel=[ylabbel, 'proportional to '];
-            end
-            
-            if compare==1 || proportion==1
-                ylabbel=[ylabbel, 'base experiment'];
-            end
-            
-            if strcmp(yaxis,'0')~=1;
-                ylabbel=yaxis;
-            end
-            
-            hy = ylabel(ylabbel, 'FontSize', 12);
-           
 
-%             tit=E_stored{n,p,colnr,1};
-%             Title=title('hier stehts', 'FontSize', 8, 'Interpreter', 'none');
-% 
-%             set(Title, 'FontSize', titlefs);
-            set(hx,'FontSize', plotfs);
-            set(hy,'FontSize',plotfs);
 
             ha = gca;
             set(ha, 'FontSize', plotfs); 
@@ -191,7 +147,7 @@ if subplotmode==0
             plotnamewithextension=[plotname '.tiff'];
             print(gcf, '-dtiff', plotnamewithextension);
             
-            close gcf
+            %close gcf
 end            
 
             

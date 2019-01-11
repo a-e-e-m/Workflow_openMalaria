@@ -468,10 +468,13 @@ if strcmp(fileformat, 'pdf')==1
     set(hh,'PaperPosition', paperposition);
 end
 
-
+set(hh, 'PaperUnit', 'centimeters');
 printto=['-d' fileformat];
 filenamewithextension=[filename '.' fileformat];
-print(gcf, printto, filenamewithextension);
 
-
+if strcmp(fileformat, 'pdf')==1
+print(hh, printto, filenamewithextension, '-bestfit');
+else
+print(hh, printto, filenamewithextension);
+end
 

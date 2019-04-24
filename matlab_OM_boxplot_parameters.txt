@@ -1,7 +1,7 @@
 %for A_load_scenarios
 
 %Please insert 'path' to the scenarios.csv file
-pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_17
+pathscen=/scicore/home/smith/denadr00/pushpull_semifield_1_new
 
 
 %Please insert the scenario parameters with its values and labels 
@@ -19,11 +19,11 @@ pathscen=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Mo
 %P=scaled_annual_EIR=EIR before LLIN=20=20
 P=scaled_annual_EIR=EIR before LLIN=50=50
 P=scaled_annual_EIR=EIR before LLIN=100=100
-P=scaled_annual_EIR=EIR before LLIN=200=200
+%P=scaled_annual_EIR=EIR before LLIN=200=200
 
 P=shares_species=dom. species=arab=arab
-P=shares_species=dom. species=gamb=gamb
-P=shares_species=dom. species=fune=fune
+%P=shares_species=dom. species=gamb=gamb
+%P=shares_species=dom. species=fune=fune
 
 %Please insert the intervention parameters with its values and labels 
 %in the form I=parameter=parameterlabel=value=valuelabel
@@ -45,13 +45,12 @@ I=repellent=R=reference=0
 I=repellent=R=0_2=0.2
 I=repellent=R=0_4=0.4
 I=repellent=R=0_6=0.6
-I=repellent=R=0_8=0.8
+%I=repellent=R=0_8=0.8
 %I=repellent=R=1=1
 
+I=trap_avail=trap_avail=trap_Bagamoyo=trap from Bagamoyo pushpull
+I=repellent_gvi=repellent_gvi=repellen_Bagamoyo=Bagamoyo push
 
-I=trap_avail=trap_avail=reference=arab 0.3, gamb 0.7, fune 1
-
-I=repellent_deterrency=deterrency=0_7=0.7
 
 %Please insert "compare=1" if you want to look - within every situation - 
 %at differences of the measures with respect to those of one specific experiment.
@@ -74,10 +73,10 @@ base=repellent_deterrency=deterrency=0_7=0.7
 %for B_load_output
 
 %Please insert 'path' to the output files
-path_output=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\Data\Rusinga_17\outputs
+path_output=/scicore/home/smith/denadr00/pushpull_semifield_1_new/outputs
 
 %Please insert 'name' of the experiment
-name=Rusingaseventeen
+name=pushpull_semifield_1_new
 
 %for C_extract_Aid_agesum
 
@@ -143,11 +142,11 @@ scaling=1
 %note that, if subplotmode=0, then the specifications below apply as well and 
 %the name of one plot will be composed of the filename given below and the 
 %name of the setting as printed in the title of the plot
-subplotmode=1
+subplotmode=0
 
 %Please insert showtitle=0 if you dont want to print titles,
 %else insert showtitle=1
-showtitle=0
+showtitle=1
 
 %If showtitle=1 and you want to print short titles, insert shorttitle=1,
 %else insert shorttitle=0
@@ -167,7 +166,7 @@ labelrotation=45
 
 %please insert the format you want to save the figure in, in the form
 %fileformat=yourformat
-fileformat=pdf
+fileformat=png
 
 %if fileformat=pdf
 %please insert the paper orientation you want to save the figure in, in the form
@@ -176,4 +175,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=C:\Users\denzad\Documents\3640_LSTM Push Pull_Saddler_serversync\3.b Modelling\Preliminary OpenMalaria\Preliminary_Analysis\plots\plots for MIM presentation\Rusinga_17\push_pull\casesperpers_20182021_boxplot
+filename=/scicore/home/smith/denadr00/pushpull_semifield_1_new/plots/plot1

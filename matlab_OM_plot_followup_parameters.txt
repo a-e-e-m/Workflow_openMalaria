@@ -21,20 +21,20 @@ SurveyTimestepCorrection=12=0.8571
 %n is the number of the row of the experiment in the subplot,
 %p is the number of the column of the experiment in the subplot,
 %and colnr is the number of the box of the experiment in the boxplot.
-timeplot=2,1,1
-timeplot=2,1,4
-timeplot=2,1,5
-timeplot=2,1,8
+timeplot=1,3,1
+%timeplot=2,1,4
+%timeplot=2,1,5
+%timeplot=2,1,8
 
-timeplot=2,3,1
-timeplot=2,3,4
-timeplot=2,3,5
-timeplot=2,3,8
+%timeplot=2,3,1
+%timeplot=2,3,4
+%timeplot=2,3,5
+%timeplot=2,3,8
 
 
 %Please insert plotmode=subplot if you want to plot the experiments into one subplot
 %and plotmode=jpeg if you want to plot the experiments into seperate jpeg files 
-plotmode=subplot
+plotmode=jpeg
 
 %Please insert the number of the age group you want to look at 
 %in the form age=number
@@ -65,5 +65,5 @@ scaling=6.369427
 
 %in case of plotmode=subplot, Please insert name and path of the pdf 
 %in the format path/filename.pdf 
-saveas=../../Rusinga_14/R14_timeplot_nUncomp_EIR200_pa_pp_2000_2035_under_five.pdf
+saveas=
 

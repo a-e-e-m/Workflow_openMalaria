@@ -145,7 +145,18 @@ finito_found=find(strcmp(Para{1,1},'finito'),1);
 finito=str2double(Para{1, 2}{finito_found});
 
 %finds out how many lines there are in the output file 
-Atrash=load(strcat(path_output,'/wu',name,'_0_out.txt'));
+  
+    %getting the name of any outputfile
+    filepath=strcat(pathscen,'/scenarios.csv');
+    fileID = fopen(filepath);
+    temp = textscan(fileID, '%s', 1, 'HeaderLines', 1, 'Delimiter', ',');
+    temp = char(temp{1,1});
+    temp = temp(1:end-4);
+    fclose(fileID);
+    clear filepath
+    
+Atrash=load(strcat(path_output,'/',temp, '.txt'));
+clear temp
 [L, trash]=size(Atrash);
 %sets finito to this value if finito was 0 i.e. if analysis shall be
 %conducted until the end of the data

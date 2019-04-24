@@ -1,7 +1,7 @@
 %for A_load_scenarios
 
 %Please insert 'path' to the scenarios.csv file
-pathscen=/scicore/home/smith/denadr00/pushpull_semifield_1_new
+pathscen=../..
 
 
 %Please insert the scenario parameters with its values and labels 
@@ -73,7 +73,7 @@ base=repellent_deterrency=deterrency=0_7=0.7
 %for B_load_output
 
 %Please insert 'path' to the output files
-path_output=/scicore/home/smith/denadr00/pushpull_semifield_1_new/outputs
+path_output=../../outputs
 
 %Please insert 'name' of the experiment
 name=pushpull_semifield_1_new

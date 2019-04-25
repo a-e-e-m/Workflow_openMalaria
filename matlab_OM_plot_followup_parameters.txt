@@ -2,7 +2,7 @@
 %and specifies for which experiments the dynamics over time should be plotted
 
 %Please insert at what survey time step you want to start the analysis 
-start=1140
+start=1
 %note month 1140 is year 2000
 
 %Please insert at what survey time step you want to end the analysis 
@@ -21,10 +21,10 @@ SurveyTimestepCorrection=12=0.8571
 %n is the number of the row of the experiment in the subplot,
 %p is the number of the column of the experiment in the subplot,
 %and colnr is the number of the box of the experiment in the boxplot.
-timeplot=1,3,1
-%timeplot=2,1,4
-%timeplot=2,1,5
-%timeplot=2,1,8
+timeplot=1,1,1
+timeplot=1,1,2
+timeplot=1,1,3
+timeplot=1,1,4
 
 %timeplot=2,3,1
 %timeplot=2,3,4
@@ -34,7 +34,7 @@ timeplot=1,3,1
 
 %Please insert plotmode=subplot if you want to plot the experiments into one subplot
 %and plotmode=jpeg if you want to plot the experiments into seperate jpeg files 
-plotmode=jpeg
+plotmode=png
 
 %Please insert the number of the age group you want to look at 
 %in the form age=number
@@ -60,10 +60,11 @@ yaxis=0
 %in the form "scaling=your_value", else enter "scaling=1".
 %note: scale by 6.369427 for age group 1 (under five)
 %note: scale by 1.18624 for age group 2 (over five)
-scaling=6.369427
-
+scaling=1
 
 %in case of plotmode=subplot, Please insert name and path of the pdf 
 %in the format path/filename.pdf 
-saveas=
+%Otherwise, please insert only path to folder where plots should be saved in
+%in format pathtoandfoldertosaveplotsin/
+saveas=../../plots/fullhistory/
 

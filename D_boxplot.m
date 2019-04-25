@@ -248,13 +248,16 @@ for run=1:1:2;
                     %loop over the scenarios belonging to the uth experiment in order to load the data 
                     for i=1:1:Eind_dim
                         datanr=Eind(i)-1; %Eind is with respect to indices in C starting with 1 while datanr is with respect to the output-nr starting with 0
-                        output_path=strrep(strcat(path_output,'/wu',name,'_',num2str(datanr),'_out.txt'), '\', '/');
+                        temp = char(C{2,1}(Eind(i)));
+                        temp = temp(1:end-4);
+                        output_path=strrep(strcat(path_output,'/',temp,'.txt'), '\', '/');
                         fileID = fopen(output_path);
                         AA=cell2mat(textscan(fileID, '%f %f %f %f', 'HeaderLines', startline-1, 'Delimiter', ','));
                         fclose(fileID);
                         AA=AA(1:finitoline-startline+1,:);
                         A(i,:,:)=AA;
                         clear AA
+                        clear temp
                     end
 
                     %finds the lines corresponding to the measure given by id

@@ -33,19 +33,19 @@ P=shares_species=dom. species=arab=arab
 %they cannot have more than one value. 
 %The order of the values given here will be preserved.
 
-I=traps=T=reference=0
-%I=traps=T=0_1=0.1
-I=traps=T=0_2=0.2
-%I=traps=T=0_3=0.3
-I=traps=T=0_4=0.4
-%I=traps=T=0_6=0.6
-%I=traps=T=0_8=0.8
+I=traps=T=0=0
+%I=traps=T=10=0.1
+I=traps=T=20=0.2
+%I=traps=T=30=0.3
+I=traps=T=40=0.4
+%I=traps=T=60=0.6
+%I=traps=T=80=0.8
 
-I=repellent=R=reference=0
-I=repellent=R=0_2=0.2
-I=repellent=R=0_4=0.4
-I=repellent=R=0_6=0.6
-%I=repellent=R=0_8=0.8
+I=repellent=R=0=0
+I=repellent=R=20=0.2
+I=repellent=R=40=0.4
+I=repellent=R=60=0.6
+%I=repellent=R=80=0.8
 %I=repellent=R=1=1
 
 I=trap_avail=trap_avail=trap_Bagamoyo=trap from Bagamoyo pushpull
@@ -76,7 +76,7 @@ base=repellent_deterrency=deterrency=0_7=0.7
 path_output=../../outputs
 
 %Please insert 'name' of the experiment
-name=pushpull_semifield_1_new
+name=pushpull_semifield_1
 
 %for C_extract_Aid_agesum
 
@@ -175,4 +175,4 @@ paperorientation=landscape
 
 %Please insert name and relative path of the file to save in the form  
 %filename=relativepath/to/yourfilenamewithoutextension
-filename=/scicore/home/smith/denadr00/pushpull_semifield_1_new/plots/plot1
+filename=../../plots/plot1

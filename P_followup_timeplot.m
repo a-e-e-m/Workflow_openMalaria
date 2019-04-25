@@ -11,7 +11,7 @@ close
 
 %clear some variables
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clearvars -except E_stored path_output name id id_name person population ylabbel;
+clearvars -except E_stored C path_output pathscen name id id_name person population ylabbel;
 
 %loading things
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,7 +31,18 @@ finito_found=find(strcmp(Para_followup_plot{1,1},'finito'),1);
 finito=str2double(Para_followup_plot{1, 2}{finito_found});
 
 %finds out how many lines there are in the output file 
-Atrash=load(strcat(path_output,'/wu',name,'_0_out.txt'));
+  
+    %getting the name of any outputfile
+    filepath=strcat(pathscen,'/scenarios.csv');
+    fileID = fopen(filepath);
+    temp = textscan(fileID, '%s', 1, 'HeaderLines', 1, 'Delimiter', ',');
+    temp = char(temp{1,1});
+    temp = temp(1:end-4);
+    fclose(fileID);
+    clear filepath
+    
+Atrash=load(strcat(path_output,'/',temp, '.txt'));
+clear temp
 [L, trash]=size(Atrash);
 %sets finito to this value if finito was 0 i.e. if analysis shall be
 %conducted until the end of the data
@@ -113,13 +124,17 @@ for u=1:1:U_dim;
     
     %loop over the scenarios belonging to the uth experiment in order to load the data 
     for i=1:1:Eind_dim
-        datanr=Eind(i)-1;
-        output_path=strrep(strcat(path_output,'/wu',name,'_',num2str(datanr),'_out.txt'), '\', '/');
+        datanr=Eind(i)-1; %Eind is with respect to indices in C starting with 1 while datanr is with respect to the output-nr starting with 0
+        temp = char(C{2,1}(Eind(i)));
+        temp = temp(1:end-4);
+        output_path=strrep(strcat(path_output,'/',temp,'.txt'), '\', '/');
         fileID = fopen(output_path);
         AA=cell2mat(textscan(fileID, '%f %f %f %f', 'HeaderLines', startline-1, 'Delimiter', ','));
         fclose(fileID);
         AA=AA(1:finitoline-startline+1,:);
         A(i,:,:)=AA;
+        clear AA
+        clear temp
     end
     
     %finds the lines corresponding to the measure given by id
@@ -228,8 +243,6 @@ for u=1:1:U_dim;
     set(hy,'FontSize',plotfs);
     
     hh=gcf;
-    set(hh,'PaperOrientation','landscape');
-    set(hh,'PaperPosition', [-1.5 -0.5 32 22]);
    
 
    
@@ -241,7 +254,8 @@ for u=1:1:U_dim;
     file_name=strrep(file_name,':','_');
     file_name=strrep(file_name,' ','_'); 
     file_name=strcat(file_name, '.', plotmode);
-    file_name=file_name{1,1};
+    file_name=strcat(saveas, file_name);
+   % file_name=file_name{1,1};
     printmode=strcat('-d', plotmode);
     print(gcf, printmode, file_name);
     end
@@ -249,6 +263,8 @@ for u=1:1:U_dim;
 
     %checks what plot to use
     if strcmp(plotmode,'subplot')==1
+    set(hh,'PaperOrientation','landscape');
+    set(hh,'PaperPosition', [-1.5 -0.5 32 22]);    
         %subplot
         print(gcf, '-dpdf', saveas);
     end

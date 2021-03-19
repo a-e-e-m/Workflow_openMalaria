@@ -16,6 +16,10 @@ fclose(fileID);
 pathscen_found=find(strcmp(Para{1,1},'pathscen'),1);
 pathscen=Para{1, 2}{pathscen_found};
 
+%Find 'nseeds', the number of seeds used to run the simulation.
+nseeds_found=find(strcmp(Para{1,1},'nseeds'),1);
+nseeds=str2double(Para{1, 2}{nseeds_found});
+
 %finds scen_columns by itself
 filepath=strcat(pathscen, '/scenarios.csv');
 fileID = fopen(filepath);
@@ -145,7 +149,7 @@ finito_found=find(strcmp(Para{1,1},'finito'),1);
 finito=str2double(Para{1, 2}{finito_found});
 
 %finds out how many lines there are in the output file 
-Atrash=load(strcat(path_output,'/wu',name,'_0_out.txt'));
+Atrash=load(strcat(path_output,'/wu',name,'_7_out.txt'));
 [L, trash]=size(Atrash);
 %sets finito to this value if finito was 0 i.e. if analysis shall be
 %conducted until the end of the data

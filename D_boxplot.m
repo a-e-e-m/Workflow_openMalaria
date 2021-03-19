@@ -74,7 +74,7 @@ for run=1:1:2;
             D_dim=numel(D_ind);  %gives the number of those scenarios
 
 
-            nseeds=D_dim/(I{1,6}*I{2,6}); %gives the number of seeds per experiment
+            %nseeds=D_dim/(I{1,6}*I{2,6}); %gives the number of seeds per experiment
             X=zeros(nseeds,(I1_dim*I2_dim-compare)); %matrix that will take the data for the boxplot, if compare==1 then there is one column less
             Label=cell.empty(I1_dim*I2_dim,0); %vector for the names of the boxes
 
